@@ -8,9 +8,9 @@ async function convertImages() {
   const files = fs.readdirSync(inputFolder);
 
   for (const file of files) {
-    if (file.match(/\.(jpg|jpeg|png)$/i)) {
+    if (file.match(/\.(jpg|jpeg|png|jfif)$/i)) {
       const inputPath = path.join(inputFolder, file);
-      const outputName = file.replace(/\.(jpg|jpeg|png)$/i, ".webp");
+      const outputName = file.replace(/\.(jpg|jpeg|png|jfif)$/i, ".webp");
       const outputPath = path.join(inputFolder, outputName);
 
       // No sobrescribir si ya existe el WebP

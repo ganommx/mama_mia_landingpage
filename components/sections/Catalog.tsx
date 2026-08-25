@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle } from "lucide-react";
 
 import { DRESSES } from "@/constants/services";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
@@ -10,6 +10,8 @@ import type { DressCardProps } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+
+const HOMEPAGE_DRESS_LIMIT = 6;
 
 export const DressCard = ({
   id,
@@ -75,14 +77,16 @@ export const Catalog = () => (
         title="Encuentra el vestido que habla de ti"
       />
       <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-        {DRESSES.map((dress) => (
+        {DRESSES.slice(0, HOMEPAGE_DRESS_LIMIT).map((dress) => (
           <DressCard key={dress.id} {...dress} />
         ))}
       </div>
-      <p className="mt-8 text-center text-sm text-brand-secondary/55">
-        Precios de renta demo. Confirma disponibilidad, condiciones y precio
-        final por WhatsApp.
-      </p>
+      <div className="mt-10 flex justify-center">
+        <Button href="/catalogo" variant="secondary">
+          Ver catálogo completo
+          <ArrowRight aria-hidden="true" className="ml-2" size={17} />
+        </Button>
+      </div>
     </div>
   </section>
 );

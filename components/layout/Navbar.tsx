@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Menu, MessageCircle, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import { NAVIGATION_ITEMS } from "@/constants/navigation";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
@@ -13,6 +14,13 @@ import mamaMiaBlack from "@/public/images/mama_mia_black.png";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { generateWhatsAppLink } = useWhatsApp();
+  const pathname = usePathname();
+  const isHome = pathname === "/";
+
+  const resolveHref = (href: string) => {
+    if (href === "#catalogo" && !isHome) return "/catalogo";
+    return href;
+  };
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-brand-secondary/10 bg-brand-soft/95 backdrop-blur-md">
@@ -33,7 +41,7 @@ export const Navbar = () => {
             <a
               key={href}
               className="text-sm font-medium text-brand-secondary/70 transition-colors hover:text-brand-primary"
-              href={href}
+              href={resolveHref(href)}
             >
               {label}
             </a>
@@ -75,7 +83,7 @@ export const Navbar = () => {
             <a
               key={href}
               className="rounded-xl px-3 py-3 font-medium hover:bg-brand-accent"
-              href={href}
+              href={resolveHref(href)}
               onClick={() => setIsMenuOpen(false)}
             >
               {label}
