@@ -1,16 +1,18 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Menu, MessageCircle, X } from 'lucide-react'
+import { useState } from "react";
+import { Menu, MessageCircle, X } from "lucide-react";
 
-import { NAVIGATION_ITEMS } from '@/constants/navigation'
-import { useWhatsApp } from '@/hooks/useWhatsApp'
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/Button'
+import { NAVIGATION_ITEMS } from "@/constants/navigation";
+import { useWhatsApp } from "@/hooks/useWhatsApp";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/Button";
+import Image from "next/image";
+import mamaMiaBlack from "@/public/images/mama_mia_black.png";
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { generateWhatsAppLink } = useWhatsApp()
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { generateWhatsAppLink } = useWhatsApp();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-brand-secondary/10 bg-brand-soft/95 backdrop-blur-md">
@@ -18,8 +20,12 @@ export const Navbar = () => {
         aria-label="Navegación principal"
         className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
       >
-        <a className="font-display text-2xl font-bold tracking-tight text-brand-secondary" href="#inicio">
-          Mama<span className="text-brand-primary">Mia</span>
+        <a className="flex items-center" href="#inicio">
+          <Image
+            src={mamaMiaBlack}
+            alt="Mamá Mía"
+            className="h-20 w-auto sm:h-[65px]"
+          />
         </a>
 
         <div className="hidden items-center gap-7 lg:flex">
@@ -44,7 +50,11 @@ export const Navbar = () => {
         <button
           aria-controls="mobile-navigation"
           aria-expanded={isMenuOpen}
-          aria-label={isMenuOpen ? 'Cerrar menú de navegación' : 'Abrir menú de navegación'}
+          aria-label={
+            isMenuOpen
+              ? "Cerrar menú de navegación"
+              : "Abrir menú de navegación"
+          }
           className="rounded-full p-2 text-brand-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary lg:hidden"
           onClick={() => setIsMenuOpen((current) => !current)}
           type="button"
@@ -55,8 +65,8 @@ export const Navbar = () => {
 
       <div
         className={cn(
-          'border-t border-brand-secondary/10 bg-brand-soft px-5 pb-6 pt-4 lg:hidden',
-          !isMenuOpen && 'hidden',
+          "border-t border-brand-secondary/10 bg-brand-soft px-5 pb-6 pt-4 lg:hidden",
+          !isMenuOpen && "hidden",
         )}
         id="mobile-navigation"
       >
@@ -71,11 +81,15 @@ export const Navbar = () => {
               {label}
             </a>
           ))}
-          <Button className="mt-3" href={generateWhatsAppLink()} target="_blank">
+          <Button
+            className="mt-3"
+            href={generateWhatsAppLink()}
+            target="_blank"
+          >
             Contactar por WhatsApp
           </Button>
         </div>
       </div>
     </header>
-  )
-}
+  );
+};
