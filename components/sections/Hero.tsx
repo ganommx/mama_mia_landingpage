@@ -7,6 +7,7 @@ import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { DRESSES } from "@/constants/services";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const Hero = () => {
   const { generateWhatsAppLink } = useWhatsApp();
@@ -39,7 +40,7 @@ export const Hero = () => {
               target="_blank"
               variant="outline"
             >
-              <MessageCircle aria-hidden="true" className="mr-2" size={18} />
+              <FaWhatsapp aria-hidden="true" className="mr-2" size={18} />
               Rentar ahora por WhatsApp
             </Button>
           </div>
