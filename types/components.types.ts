@@ -36,6 +36,7 @@ export interface DressCardProps {
   colorHex: string;
   imageUrl: string;
   isAvailable: boolean;
+  imageScale?: number;
 }
 
 export interface LightboxProps {

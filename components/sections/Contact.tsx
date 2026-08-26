@@ -1,18 +1,21 @@
-'use client'
+"use client";
 
-import { Clock3, MapPin, MessageCircle } from 'lucide-react'
+import { Clock3, MapPin, MessageCircle } from "lucide-react";
 
-import { useWhatsApp } from '@/hooks/useWhatsApp'
-import { Button } from '@/components/ui/Button'
-import { SectionTitle } from '@/components/ui/SectionTitle'
+import { useWhatsApp } from "@/hooks/useWhatsApp";
+import { Button } from "@/components/ui/Button";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
-const FALLBACK_MAP_URL = 'https://www.google.com/maps?q=Mexico&output=embed'
+const FALLBACK_MAP_URL = "https://www.google.com/maps?q=Mexico&output=embed";
 
 export const Contact = () => {
-  const { generateWhatsAppLink } = useWhatsApp()
-  const address = process.env.NEXT_PUBLIC_BUSINESS_ADDRESS ?? 'Tu dirección aquí'
-  const configuredMapUrl = process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL ?? ''
-  const mapUrl = configuredMapUrl.includes('...') ? FALLBACK_MAP_URL : configuredMapUrl
+  const { generateWhatsAppLink } = useWhatsApp();
+  const address =
+    process.env.NEXT_PUBLIC_BUSINESS_ADDRESS ?? "Tu dirección aquí";
+  const configuredMapUrl = process.env.NEXT_PUBLIC_GOOGLE_MAPS_URL ?? "";
+  const mapUrl = configuredMapUrl.includes("...")
+    ? FALLBACK_MAP_URL
+    : configuredMapUrl;
 
   return (
     <section className="bg-white px-5 py-20 sm:px-8 sm:py-28" id="contacto">
@@ -27,7 +30,9 @@ export const Contact = () => {
           />
           <Button
             className="mt-8 w-full sm:w-fit"
-            href={generateWhatsAppLink('Hola, quiero agendar una asesoría para encontrar mi vestido ideal.')}
+            href={generateWhatsAppLink(
+              "Hola, quiero agendar una asesoría para encontrar mi vestido ideal.",
+            )}
             target="_blank"
           >
             <MessageCircle aria-hidden="true" className="mr-2" size={19} />
@@ -35,11 +40,19 @@ export const Contact = () => {
           </Button>
           <div className="mt-10 space-y-4 border-t border-white/10 pt-7 text-sm text-white/65">
             <p className="flex items-start gap-3">
-              <MapPin aria-hidden="true" className="mt-0.5 shrink-0 text-brand-primary" size={18} />
+              <MapPin
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-brand-primary"
+                size={18}
+              />
               {address}
             </p>
             <p className="flex items-start gap-3">
-              <Clock3 aria-hidden="true" className="mt-0.5 shrink-0 text-brand-primary" size={18} />
+              <Clock3
+                aria-hidden="true"
+                className="mt-0.5 shrink-0 text-brand-primary"
+                size={18}
+              />
               Lunes a sábado · 10:00 a 19:00 h
             </p>
           </div>
@@ -56,5 +69,5 @@ export const Contact = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};

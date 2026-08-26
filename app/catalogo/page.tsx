@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
-import { DRESSES } from "@/constants/services";
-import { DressCard, Footer, Navbar, SectionTitle } from "@/components";
+import { Footer, Navbar, SectionTitle } from "@/components";
+import { CatalogoContent } from "./CatalogoContent";
 
 export const metadata: Metadata = {
   title: "Catálogo completo",
@@ -21,11 +21,7 @@ export default function CatalogoPage() {
               eyebrow="Nuestra colección"
               title="Catálogo completo"
             />
-            <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-              {DRESSES.map((dress) => (
-                <DressCard key={dress.id} {...dress} />
-              ))}
-            </div>
+            <CatalogoContent />
             <p className="mt-10 text-center text-sm text-brand-secondary/55">
               Los precios mostrados corresponden únicamente a la renta de los
               vestidos. Para consultar el precio de venta y disponibilidad,
