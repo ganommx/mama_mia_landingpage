@@ -38,6 +38,7 @@ export interface Dress {
   imageUrl: string;
   category: DressCategory;
   isAvailable: boolean;
+  imageScale?: number;
 }
 export interface Testimonial {
   id: string;

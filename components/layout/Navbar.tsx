@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/Button";
 import Image from "next/image";
 import mamaMiaBlack from "@/public/images/mama_mia_black.png";
+import { FaWhatsapp } from "react-icons/fa";
 
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -54,7 +55,7 @@ export const Navbar = () => {
 
         <div className="hidden lg:block">
           <Button href={generateWhatsAppLink()} target="_blank">
-            <MessageCircle aria-hidden="true" className="mr-2" size={18} />
+            <FaWhatsapp aria-hidden="true" className="mr-2" size={18} />
             Contactar por WhatsApp
           </Button>
         </div>
@@ -77,29 +78,36 @@ export const Navbar = () => {
 
       <div
         className={cn(
-          "border-t border-brand-secondary/10 bg-brand-soft px-5 pb-6 pt-4 lg:hidden",
-          !isMenuOpen && "hidden",
+          "grid overflow-hidden border-t border-brand-secondary/10 bg-brand-soft transition-all duration-300 ease-in-out lg:hidden",
+          isMenuOpen
+            ? "grid-rows-[1fr] opacity-100"
+            : "grid-rows-[0fr] opacity-0",
         )}
         id="mobile-navigation"
       >
-        <div className="mx-auto flex max-w-7xl flex-col gap-1">
-          {NAVIGATION_ITEMS.map(({ href, label }) => (
-            <a
-              key={href}
-              className="rounded-xl px-3 py-3 font-medium hover:bg-brand-accent"
-              href={resolveHref(href)}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {label}
-            </a>
-          ))}
-          <Button
-            className="mt-3"
-            href={generateWhatsAppLink()}
-            target="_blank"
-          >
-            Contactar por WhatsApp
-          </Button>
+        <div className="min-h-0">
+          <div className="px-5 pb-6 pt-4">
+            <div className="mx-auto flex max-w-7xl flex-col gap-1">
+              {NAVIGATION_ITEMS.map(({ href, label }) => (
+                <a
+                  key={href}
+                  className="rounded-xl px-3 py-3 font-medium hover:bg-brand-accent"
+                  href={resolveHref(href)}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {label}
+                </a>
+              ))}
+
+              <Button
+                className="mt-3"
+                href={generateWhatsAppLink()}
+                target="_blank"
+              >
+                Contactar por WhatsApp
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </header>

@@ -90,6 +90,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/4.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
+    imageScale: 1.13,
   },
   {
     id: "azul-crepusculo",
@@ -101,6 +102,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/5.webp",
     category: DressCategory.WEDDING,
     isAvailable: true,
+    imageScale: 1.25,
   },
   {
     id: "cuarzo-rosa",
@@ -112,6 +114,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/6.webp",
     category: DressCategory.GRADUATION,
     isAvailable: true,
+    imageScale: 1.11,
   },
   {
     id: "negro-obsidiana",
@@ -123,6 +126,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/7.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
+    imageScale: 1.1,
   },
   {
     id: "azul-petroleo",
@@ -134,6 +138,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/8.webp",
     category: DressCategory.WEDDING,
     isAvailable: true,
+    imageScale: 1.08,
   },
   {
     id: "rojo-fresa",
@@ -145,6 +150,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/9.webp",
     category: DressCategory.QUINCEANERA,
     isAvailable: true,
+    imageScale: 1.18,
   },
   {
     id: "negro",
@@ -156,6 +162,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/10.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
+    imageScale: 1.13,
   },
   {
     id: "lila-grisaceo",
@@ -167,6 +174,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/11.webp",
     category: DressCategory.GRADUATION,
     isAvailable: true,
+    imageScale: 1.12,
   },
   {
     id: "floral-multicolor",
@@ -179,10 +187,11 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/12.webp",
     category: DressCategory.WEDDING,
     isAvailable: true,
+    imageScale: 1.11,
   },
   {
-    id: "magenta",
-    name: "Magenta",
+    id: "fucsia",
+    name: "Fucsia",
     price: 900,
     sizes: [],
     color: "rosa",
@@ -190,11 +199,12 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/13.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
+    imageScale: 1.11,
   },
   {
     id: "rosa-valle",
-    name: "Rosa valle",
-    price: 950,
+    name: "",
+    price: 0,
     sizes: [],
     color: "marfil",
     colorHex: "#FFFFF0",

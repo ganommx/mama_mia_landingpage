@@ -21,7 +21,7 @@ export default function CatalogoPage() {
               eyebrow="Nuestra colección"
               title="Catálogo completo"
             />
-            <div className="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
               {DRESSES.map((dress) => (
                 <DressCard key={dress.id} {...dress} />
               ))}
