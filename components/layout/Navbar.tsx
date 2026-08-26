@@ -19,6 +19,10 @@ export const Navbar = () => {
 
   const resolveHref = (href: string) => {
     if (href === "#catalogo" && !isHome) return "/catalogo";
+
+    if (!isHome && href.startsWith("#")) {
+      return `/${href}`;
+    }
     return href;
   };
 
@@ -28,7 +32,7 @@ export const Navbar = () => {
         aria-label="Navegación principal"
         className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
       >
-        <a className="flex items-center" href="#inicio">
+        <a className="flex items-center" href={isHome ? "#inicio" : "/"}>
           <Image
             src={mamaMiaBlack}
             alt="Mamá Mía"

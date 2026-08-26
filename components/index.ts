@@ -1,5 +1,6 @@
 export { Badge } from './ui/Badge'
 export { Button } from './ui/Button'
+export { Lightbox } from './ui/Lightbox'
 export { SectionTitle } from './ui/SectionTitle'
 
 export { Navbar } from './layout/Navbar'

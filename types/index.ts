@@ -3,6 +3,7 @@ export type {
   ButtonProps,
   ButtonVariant,
   DressCardProps,
+  LightboxProps,
   SectionTitleProps,
 } from './components.types'
 export {

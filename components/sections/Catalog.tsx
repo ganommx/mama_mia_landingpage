@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
 
@@ -9,6 +10,7 @@ import { formatCurrency } from "@/lib/utils";
 import type { DressCardProps } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { Lightbox } from "@/components/ui/Lightbox";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const HOMEPAGE_DRESS_LIMIT = 6;
@@ -21,13 +23,19 @@ export const DressCard = ({
   color,
   imageUrl,
   isAvailable,
+  colorHex,
 }: DressCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
-  const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha?`;
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha? También me gustaría conocer su precio de venta.`;
 
   return (
     <article className="group overflow-hidden rounded-3xl bg-white shadow-soft">
-      <div className="relative aspect-[4/5] overflow-hidden bg-brand-accent">
+      <button
+        className="relative block aspect-[4/5] w-full overflow-hidden bg-brand-accent"
+        onClick={() => setIsLightboxOpen(true)}
+        type="button"
+      >
         <Image
           alt={`Vestido ${name} en color ${color}`}
           className="object-cover transition-transform duration-500 group-hover:scale-105"
@@ -38,20 +46,35 @@ export const DressCard = ({
         <Badge className="absolute left-4 top-4 bg-white/90 normal-case tracking-normal">
           {isAvailable ? "Disponible" : "Próximamente"}
         </Badge>
-      </div>
+      </button>
       <div className="p-6">
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h3 className="font-display text-2xl text-brand-secondary">
+        <div className="flex flex-col">
+          <div className="flex min-h-[64px] items-start justify-between gap-3">
+            <h3 className="font-display text-2xl leading-tight text-brand-secondary">
               {name}
             </h3>
-            <p className="mt-1 text-sm text-brand-secondary/55">
-              Tallas {sizes.join(" · ")}
-            </p>
+
+            <span
+              className="mt-1 h-7 w-7 shrink-0 overflow-hidden rounded-full border border-brand-secondary/100 shadow-sm"
+              style={{ background: colorHex }}
+              aria-label={`Color: ${color}`}
+              title={color}
+            />
           </div>
-          <p className="whitespace-nowrap font-semibold text-brand-secondary">
-            {formatCurrency(price)}
+
+          <p className="mt-[-20px] text-sm text-brand-secondary/55">
+            Tallas {sizes.join(" · ")}
           </p>
+
+          <div className="mt-3 flex items-center justify-between">
+            <span className="rounded-md bg-brand-soft px-2 py-[5px] text-xs text-brand-secondary/55">
+              Precio de renta
+            </span>
+
+            <span className="whitespace-nowrap font-semibold text-brand-secondary">
+              {formatCurrency(price)}
+            </span>
+          </div>
         </div>
         <Button
           className="mt-5 w-full"
@@ -64,6 +87,12 @@ export const DressCard = ({
           {isAvailable ? "Consultar por WhatsApp" : "No disponible"}
         </Button>
       </div>
+      <Lightbox
+        alt={`Vestido ${name} en color ${color}`}
+        imageUrl={imageUrl}
+        isOpen={isLightboxOpen}
+        onClose={() => setIsLightboxOpen(false)}
+      />
     </article>
   );
 };
@@ -87,6 +116,11 @@ export const Catalog = () => (
           <ArrowRight aria-hidden="true" className="ml-2" size={17} />
         </Button>
       </div>
+      <p className="mt-8 text-center text-sm text-brand-secondary/55">
+        Los precios mostrados corresponden únicamente a la renta de los
+        vestidos. Para consultar el precio de venta y disponibilidad,
+        contáctanos por WhatsApp.
+      </p>
     </div>
   </section>
 );

@@ -6,6 +6,7 @@ import { ArrowDown, MessageCircle } from "lucide-react";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { DRESSES } from "@/constants/services";
 
 export const Hero = () => {
   const { generateWhatsAppLink } = useWhatsApp();
@@ -51,7 +52,7 @@ export const Hero = () => {
             </p>
             <p>
               <strong className="block text-xl text-brand-secondary">
-                4.9/5
+                5/5
               </strong>{" "}
               en atención
             </p>
@@ -73,7 +74,7 @@ export const Hero = () => {
               fill
               priority
               sizes="(max-width: 1024px) 90vw, 42vw"
-              src="https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&q=90"
+              src={DRESSES[5].imageUrl}
             />
           </div>
           <div className="absolute -bottom-5 -left-3 rounded-2xl bg-white px-5 py-4 shadow-soft sm:-left-10">

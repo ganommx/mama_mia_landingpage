@@ -26,6 +26,11 @@ export default function CatalogoPage() {
                 <DressCard key={dress.id} {...dress} />
               ))}
             </div>
+            <p className="mt-10 text-center text-sm text-brand-secondary/55">
+              Los precios mostrados corresponden únicamente a la renta de los
+              vestidos. Para consultar el precio de venta y disponibilidad,
+              contáctanos por WhatsApp.
+            </p>
           </div>
         </section>
       </main>
