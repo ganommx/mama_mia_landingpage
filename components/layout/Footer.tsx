@@ -1,8 +1,11 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { Camera, Users } from "lucide-react";
+import Image from "next/image";
+import { Users } from "lucide-react";
+import { FaInstagram } from "react-icons/fa";
 
+import mamaMiaBlack from "@/public/images/mama_mia_black.png";
 import { NAVIGATION_ITEMS } from "@/constants/navigation";
 
 export const Footer = () => {
@@ -23,11 +26,12 @@ export const Footer = () => {
     <footer className="bg-[#232323] px-5 py-12 text-white sm:px-8">
       <div className="mx-auto grid max-w-7xl gap-10 border-b border-white/10 pb-10 md:grid-cols-3">
         <div>
-          <a
-            className="font-display text-3xl font-bold"
-            href={resolveHref("#inicio")}
-          >
-            Mama<span className="text-brand-primary">Mia</span>
+          <a className="flex items-center" href={resolveHref("#inicio")}>
+            <Image
+              alt="Mamá Mía"
+              className="h-16 w-auto brightness-0 invert sm:h-[60px]"
+              src={mamaMiaBlack}
+            />
           </a>
 
           <p className="mt-4 max-w-xs text-sm leading-6 text-white/60">
@@ -63,9 +67,11 @@ export const Footer = () => {
             <a
               aria-label="Instagram de MamaMia"
               className="rounded-full border border-white/15 p-3 hover:border-brand-primary hover:text-brand-primary"
-              href="#"
+              href="https://www.instagram.com/mamamia.337/"
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              <Camera aria-hidden="true" size={18} />
+              <FaInstagram aria-hidden="true" size={18} />
             </a>
 
             <a
