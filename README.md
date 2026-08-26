@@ -1,6 +1,6 @@
 # MamaMia
 
-Landing page profesional para un negocio de renta y venta de vestidos. Está orientada a conversión mediante catálogo, testimonios, preguntas frecuentes y contacto directo por WhatsApp.
+Landing page profesional para un negocio de renta y venta de vestidos. Está orientada a conversión mediante catálogo, preguntas frecuentes y contacto directo por WhatsApp.
 
 ## Stack
 
@@ -49,7 +49,7 @@ npm run type-check
 ## Personalización
 
 - Catálogo y servicios: `constants/services.ts`
-- Testimonios: `constants/testimonials.ts`
+<!-- - Testimonios: `constants/testimonials.ts`-->
 - Preguntas frecuentes: `constants/faq.ts`
 - Navegación: `constants/navigation.ts`
 - Paleta y tipografías: `tailwind.config.ts`

@@ -1,3 +1,5 @@
+/*
+
 import Image from 'next/image'
 import { Quote, Star } from 'lucide-react'
 
@@ -43,3 +45,4 @@ export const Testimonials = () => (
     </div>
   </section>
 )
+*/

@@ -8,7 +8,7 @@ import {
   Navbar,
   Services,
   Testimonials,
-} from '@/components'
+} from "@/components";
 
 export default function HomePage() {
   return (
@@ -19,11 +19,10 @@ export default function HomePage() {
         <Services />
         <HowItWorks />
         <Catalog />
-        <Testimonials />
         <FAQ />
         <Contact />
       </main>
       <Footer />
     </>
-  )
+  );
 }
