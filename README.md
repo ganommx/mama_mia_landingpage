@@ -55,8 +55,6 @@ npm run type-check
 - Paleta y tipografías: `tailwind.config.ts`
 - SEO y Open Graph: `app/layout.tsx`
 
-Las imágenes actuales son fotografías editoriales remotas de Unsplash y los nombres, precios, testimonios y datos de contacto son contenido demo. Antes de publicar, reemplázalos por material autorizado y datos reales del negocio. Si se usa otro proveedor de imágenes, agrega su dominio a `images.remotePatterns` en `next.config.ts`.
-
 ## Estructura
 
 La página se compone de componentes atómicos en `components/ui`, estructura global en `components/layout` y secciones de conversión en `components/sections`. Los datos, tipos y lógica de WhatsApp están separados en `constants`, `types` y `hooks`.
