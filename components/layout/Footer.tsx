@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Users } from "lucide-react";
 import { FaInstagram } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
 
 import mamaMiaBlack from "@/public/images/mama_mia_black.png";
 import { NAVIGATION_ITEMS } from "@/constants/navigation";
@@ -77,9 +78,11 @@ export const Footer = () => {
             <a
               aria-label="Facebook de MamaMia"
               className="rounded-full border border-white/15 p-3 hover:border-brand-primary hover:text-brand-primary"
-              href="#"
+              href="https://facebook.com"
+              rel="noopener noreferrer"
+              target="_blank"
             >
-              <Users aria-hidden="true" size={18} />
+              <FaFacebook aria-hidden="true" size={18} />
             </a>
           </div>
         </div>

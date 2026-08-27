@@ -1,16 +1,21 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Minus, Plus } from 'lucide-react'
+import { useState } from "react";
+import { Minus, Plus } from "lucide-react";
 
-import { FAQ_ITEMS } from '@/constants/faq'
-import { SectionTitle } from '@/components/ui/SectionTitle'
+import { FAQ_ITEMS } from "@/constants/faq";
+import { SectionTitle } from "@/components/ui/SectionTitle";
 
 export const FAQ = () => {
-  const [openItemId, setOpenItemId] = useState<string | null>(FAQ_ITEMS[0]?.id ?? null)
+  const [openItemId, setOpenItemId] = useState<string | null>(
+    FAQ_ITEMS[0]?.id ?? null,
+  );
 
   return (
-    <section className="bg-brand-soft px-5 py-20 sm:px-8 sm:py-28" id="preguntas">
+    <section
+      className="bg-brand-soft px-5 py-10 sm:px-8 sm:py-10"
+      id="preguntas"
+    >
       <div className="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.8fr_1.2fr]">
         <SectionTitle
           align="left"
@@ -20,8 +25,8 @@ export const FAQ = () => {
         />
         <div className="divide-y divide-brand-secondary/10 border-y border-brand-secondary/10">
           {FAQ_ITEMS.map(({ answer, id, question }) => {
-            const isOpen = openItemId === id
-            const panelId = `faq-panel-${id}`
+            const isOpen = openItemId === id;
+            const panelId = `faq-panel-${id}`;
 
             return (
               <div key={id}>
@@ -35,7 +40,11 @@ export const FAQ = () => {
                     type="button"
                   >
                     {question}
-                    {isOpen ? <Minus aria-hidden="true" size={20} /> : <Plus aria-hidden="true" size={20} />}
+                    {isOpen ? (
+                      <Minus aria-hidden="true" size={20} />
+                    ) : (
+                      <Plus aria-hidden="true" size={20} />
+                    )}
                   </button>
                 </h3>
                 <div
@@ -48,10 +57,10 @@ export const FAQ = () => {
                   {answer}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
