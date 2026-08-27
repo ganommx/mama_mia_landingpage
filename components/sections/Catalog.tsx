@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 import { DRESSES } from "@/constants/services";
@@ -23,12 +23,16 @@ export const DressCard = ({
   sizes,
   color,
   imageUrl,
+  backImageUrl,
   isAvailable,
   colorHex,
   imageScale = 1.1,
 }: DressCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [showBack, setShowBack] = useState(false);
+  const hasBackView = !!backImageUrl;
+  const activeImageUrl = hasBackView && showBack ? backImageUrl : imageUrl;
   const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha? También me gustaría conocer su precio de venta.`;
 
   return (
@@ -44,12 +48,44 @@ export const DressCard = ({
           fill
           quality={100}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-          src={imageUrl}
+          src={activeImageUrl}
           style={{ transform: `scale(${imageScale})` }}
         />
         <Badge className="absolute left-2 top-2 bg-white/90 !px-2 !py-0.5 !text-[10px] normal-case tracking-normal sm:left-4 sm:top-4 sm:!px-3 sm:!py-1 sm:!text-xs">
           {isAvailable ? "Disponible" : "Próximamente"}
         </Badge>
+        {hasBackView && (
+          <>
+            {showBack && (
+              <span
+                aria-label="Ver frente"
+                className="absolute left-1.5 top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:left-2.5 sm:h-8 sm:w-8"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowBack(false);
+                }}
+                role="button"
+                tabIndex={0}
+              >
+                <ChevronLeft size={16} />
+              </span>
+            )}
+            {!showBack && (
+              <span
+                aria-label="Ver espalda"
+                className="absolute right-1.5 top-1/2 z-10 flex h-7 w-7 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white backdrop-blur-sm transition-colors hover:bg-black/60 sm:right-2.5 sm:h-8 sm:w-8"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setShowBack(true);
+                }}
+                role="button"
+                tabIndex={0}
+              >
+                <ChevronRight size={16} />
+              </span>
+            )}
+          </>
+        )}
       </button>
       <div className="p-3 sm:p-6">
         <div className="flex flex-col">
@@ -106,7 +142,7 @@ export const DressCard = ({
       </div>
       <Lightbox
         alt={`Vestido ${name} en color ${color}`}
-        imageUrl={imageUrl}
+        imageUrl={activeImageUrl}
         isOpen={isLightboxOpen}
         onClose={() => setIsLightboxOpen(false)}
       />

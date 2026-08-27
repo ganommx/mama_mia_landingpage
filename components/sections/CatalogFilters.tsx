@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -116,16 +116,25 @@ function AccordionPanel({
   children: React.ReactNode;
 }) {
   const [height, setHeight] = useState(0);
-  const ref = useCallback((node: HTMLDivElement | null) => {
+  const nodeRef = useRef<HTMLDivElement | null>(null);
+
+  const callbackRef = useCallback((node: HTMLDivElement | null) => {
+    nodeRef.current = node;
     if (node) setHeight(node.scrollHeight);
   }, []);
+
+  useEffect(() => {
+    if (isOpen && nodeRef.current) {
+      setHeight(nodeRef.current.scrollHeight);
+    }
+  }, [isOpen]);
 
   return (
     <div
       className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
       style={{ maxHeight: isOpen ? `${height}px` : "0px" }}
     >
-      <div ref={ref} className="flex flex-wrap gap-2">
+      <div ref={callbackRef} className="flex w-full flex-wrap gap-2">
         {children}
       </div>
     </div>
@@ -189,10 +198,7 @@ export const CatalogFilters = ({
     setOpenSection((prev) => (prev === key ? null : key));
   };
 
-  const toggleArrayFilter = (
-    key: "colors" | "sizes",
-    value: string,
-  ) => {
+  const toggleArrayFilter = (key: "colors" | "sizes", value: string) => {
     onFilterChange({
       ...filters,
       [key]: filters[key].includes(value)
@@ -388,7 +394,16 @@ export const CatalogFilters = ({
         </p>
 
         {/* Mobile expandable panel */}
-        <MobileFilterPanel open={mobileOpen}>
+        <MobileFilterPanel open={mobileOpen} footer={
+            <button
+              className="w-full rounded-full border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary/60 transition-colors hover:border-brand-secondary/40 hover:text-brand-secondary"
+              onClick={() => setMobileOpen(false)}
+              type="button"
+            >
+              Cerrar
+            </button>
+          }
+        >
           <AccordionHeader
             isOpen={openSection === "color"}
             count={getActiveCount("color")}
@@ -397,7 +412,7 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "color"}>
-            <div className="px-1 pb-1 pt-2">{renderColorOptions()}</div>
+            <div className="flex flex-wrap gap-2 px-1 pb-1 pt-2">{renderColorOptions()}</div>
           </AccordionPanel>
 
           <AccordionHeader
@@ -434,14 +449,6 @@ export const CatalogFilters = ({
               {renderAvailabilityOptions()}
             </div>
           </AccordionPanel>
-
-          <button
-            className="w-full rounded-full border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary/60 transition-colors hover:border-brand-secondary/40 hover:text-brand-secondary"
-            onClick={() => setMobileOpen(false)}
-            type="button"
-          >
-            Cerrar
-          </button>
         </MobileFilterPanel>
       </div>
     </>
@@ -453,25 +460,22 @@ export const CatalogFilters = ({
 function MobileFilterPanel({
   open,
   children,
+  footer,
 }: {
   open: boolean;
   children: React.ReactNode;
+  footer: React.ReactNode;
 }) {
-  const [height, setHeight] = useState(0);
-  const ref = useCallback((node: HTMLDivElement | null) => {
-    if (node) setHeight(node.scrollHeight);
-  }, []);
-
   return (
     <div
-      className="overflow-hidden transition-[max-height] duration-300 ease-in-out"
-      style={{ maxHeight: open ? `${height + 20}px` : "0px" }}
+      className="w-full overflow-hidden transition-[max-height] duration-300 ease-in-out"
+      style={{ maxHeight: open ? "70vh" : "0px" }}
     >
-      <div
-        ref={ref}
-        className="mt-3 space-y-3 rounded-2xl border border-brand-secondary/10 bg-white p-4 shadow-sm"
-      >
-        {children}
+      <div className="flex max-h-[70vh] flex-col rounded-2xl border border-brand-secondary/10 bg-white p-4 shadow-sm">
+        <div className="min-h-0 flex-1 overflow-y-auto">
+          {children}
+        </div>
+        <div className="shrink-0 pt-3">{footer}</div>
       </div>
     </div>
   );
