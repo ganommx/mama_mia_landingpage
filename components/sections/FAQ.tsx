@@ -1,15 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Minus, Plus } from "lucide-react";
 
 import { FAQ_ITEMS } from "@/constants/faq";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
+const EASE = "cubic-bezier(0.4, 0, 0.2, 1)";
+
 export const FAQ = () => {
   const [openItemId, setOpenItemId] = useState<string | null>(
     FAQ_ITEMS[0]?.id ?? null,
   );
+  const contentRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const getMaxHeight = (id: string) => {
+    const el = contentRefs.current[id];
+    return el ? `${el.scrollHeight}px` : "0px";
+  };
 
   return (
     <section
@@ -40,21 +48,38 @@ export const FAQ = () => {
                     type="button"
                   >
                     {question}
-                    {isOpen ? (
-                      <Minus aria-hidden="true" size={20} />
-                    ) : (
-                      <Plus aria-hidden="true" size={20} />
-                    )}
+                    <span
+                      className="shrink-0 transition-transform duration-300"
+                      style={{ transitionTimingFunction: EASE }}
+                    >
+                      {isOpen ? (
+                        <Minus aria-hidden="true" size={20} />
+                      ) : (
+                        <Plus aria-hidden="true" size={20} />
+                      )}
+                    </span>
                   </button>
                 </h3>
                 <div
                   aria-labelledby={`faq-button-${id}`}
-                  className="pb-6 pr-10 leading-7 text-brand-secondary/65"
-                  hidden={!isOpen}
-                  id={panelId}
-                  role="region"
+                  className="overflow-hidden transition-[max-height,opacity,transform] duration-300 ease-out"
+                  style={{
+                    maxHeight: isOpen ? getMaxHeight(id) : "0px",
+                    opacity: isOpen ? 1 : 0,
+                    transform: isOpen
+                      ? "translateY(0)"
+                      : "translateY(-4px)",
+                    transitionTimingFunction: EASE,
+                  }}
                 >
-                  {answer}
+                  <div
+                    className="pb-6 pr-10 leading-7 text-brand-secondary/65"
+                    ref={(el) => {
+                      contentRefs.current[id] = el;
+                    }}
+                  >
+                    {answer}
+                  </div>
                 </div>
               </div>
             );
