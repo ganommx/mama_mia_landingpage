@@ -36,6 +36,7 @@ export interface Dress {
   color: string;
   colorHex: string;
   imageUrl: string;
+  backImageUrl?: string;
   category: DressCategory;
   isAvailable: boolean;
   imageScale?: number;

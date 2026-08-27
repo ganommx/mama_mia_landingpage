@@ -35,6 +35,7 @@ export interface DressCardProps {
   color: string;
   colorHex: string;
   imageUrl: string;
+  backImageUrl?: string;
   isAvailable: boolean;
   imageScale?: number;
 }
