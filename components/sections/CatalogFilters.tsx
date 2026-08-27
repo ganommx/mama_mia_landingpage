@@ -27,6 +27,7 @@ export const COLOR_GROUPS = [
   { key: "verde", label: "Verde", hex: "#16A34A" },
   { key: "púrpura", label: "Púrpura", hex: "#9F3383" },
   { key: "gris", label: "Gris", hex: "#ACABBF" },
+  { key: "café", label: "Café", hex: "#A55F2A" },
   { key: "varios", label: "Varios", hex: "#BA9248" },
 ];
 
@@ -394,7 +395,9 @@ export const CatalogFilters = ({
         </p>
 
         {/* Mobile expandable panel */}
-        <MobileFilterPanel open={mobileOpen} footer={
+        <MobileFilterPanel
+          open={mobileOpen}
+          footer={
             <button
               className="w-full rounded-full border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary/60 transition-colors hover:border-brand-secondary/40 hover:text-brand-secondary"
               onClick={() => setMobileOpen(false)}
@@ -412,7 +415,9 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "color"}>
-            <div className="flex flex-wrap gap-2 px-1 pb-1 pt-2">{renderColorOptions()}</div>
+            <div className="flex flex-wrap gap-2 px-1 pb-1 pt-2">
+              {renderColorOptions()}
+            </div>
           </AccordionPanel>
 
           <AccordionHeader
@@ -445,9 +450,7 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "availability"}>
-            <div className="px-1 pb-1 pt-2">
-              {renderAvailabilityOptions()}
-            </div>
+            <div className="px-1 pb-1 pt-2">{renderAvailabilityOptions()}</div>
           </AccordionPanel>
         </MobileFilterPanel>
       </div>
@@ -472,9 +475,7 @@ function MobileFilterPanel({
       style={{ maxHeight: open ? "70vh" : "0px" }}
     >
       <div className="flex max-h-[70vh] flex-col rounded-2xl border border-brand-secondary/10 bg-white p-4 shadow-sm">
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          {children}
-        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
         <div className="shrink-0 pt-3">{footer}</div>
       </div>
     </div>
