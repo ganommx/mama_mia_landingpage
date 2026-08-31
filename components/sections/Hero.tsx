@@ -61,7 +61,7 @@ export const Hero = () => {
             </p>
             <p>
               <strong className="block text-xl text-brand-secondary">
-                XS–XG
+                Varias tallas
               </strong>{" "}
               tallas
             </p>

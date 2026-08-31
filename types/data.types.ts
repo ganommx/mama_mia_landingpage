@@ -33,7 +33,7 @@ export interface Dress {
   name: string;
   price: number;
   sizes: string[];
-  color: string;
+  color: string[];
   colorHex: string;
   imageUrl: string;
   backImageUrl?: string;

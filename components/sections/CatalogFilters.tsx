@@ -29,7 +29,12 @@ export const COLOR_GROUPS = [
   { key: "púrpura", label: "Púrpura", hex: "#9F3383" },
   { key: "gris", label: "Gris", hex: "#ACABBF" },
   { key: "café", label: "Café", hex: "#A55F2A" },
-  { key: "varios", label: "Varios", hex: "#BA9248" },
+  { key: "blanco", label: "Blanco", hex: "#FFFFFF" },
+  {
+    key: "varios",
+    label: "Varios",
+    hex: "linear-gradient(135deg, #E91E63 10%, #F9D423 35%, #00A86B 100%, #045D90 80% )",
+  },
 ];
 
 const LETTER_INDEX: Record<string, number> = { S: 0, M: 1 };
@@ -41,7 +46,9 @@ const sizeSortKey = (size: string): number => {
 };
 
 export const SIZE_OPTIONS = Array.from(
-  new Set(DRESSES.flatMap((dress) => dress.sizes).filter((s) => s.trim() !== "")),
+  new Set(
+    DRESSES.flatMap((dress) => dress.sizes).filter((s) => s.trim() !== ""),
+  ),
 ).sort((a, b) => {
   const diff = sizeSortKey(a) - sizeSortKey(b);
   return diff !== 0 ? diff : a.length - b.length;
@@ -245,7 +252,10 @@ export const CatalogFilters = ({
     key: "priceRange" | "availability",
     value: string,
   ) => {
-    onFilterChange({ ...filters, [key]: value });
+    onFilterChange({
+      ...filters,
+      [key]: filters[key] === value && value !== "all" ? "all" : value,
+    });
   };
 
   const clearAll = () => onFilterChange(INITIAL_FILTERS);

@@ -23,7 +23,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "tallas",
     question: "¿Qué tallas manejan?",
     answer:
-      "Manejamos tallas junior, como 1/2, 3/4 y 5/6, así como tallas de señora: 0, 2, 4, 6, 8 y 10. También contamos con algunos modelos en tallas S y M. La disponibilidad depende de cada modelo.",
+      "Manejamos tallas junior, como 1/2, 3/4 y 5/6, así como tallas de señora: 0, 2, 4, 6, 8, 10, 14 y 16. También contamos con algunos modelos en tallas S y M. La disponibilidad depende de cada modelo.",
   },
   {
     id: "recoger",
