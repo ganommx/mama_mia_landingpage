@@ -1,4 +1,4 @@
-import type { Testimonial } from '@/types'
+/*import type { Testimonial } from '@/types'
 
 export const TESTIMONIALS: Testimonial[] = [
   {
@@ -26,3 +26,4 @@ export const TESTIMONIALS: Testimonial[] = [
     imageUrl: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80',
   },
 ]
+*/

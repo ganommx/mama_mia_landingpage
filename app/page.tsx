@@ -7,7 +7,6 @@ import {
   HowItWorks,
   Navbar,
   Services,
-  Testimonials,
 } from "@/components";
 
 export default function HomePage() {

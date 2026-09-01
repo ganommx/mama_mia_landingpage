@@ -5,6 +5,7 @@ import { Clock3, MapPin, MessageCircle } from "lucide-react";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { Button } from "@/components/ui/Button";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { FaWhatsapp } from "react-icons/fa";
 
 const FALLBACK_MAP_URL = "https://www.google.com/maps?q=Mexico&output=embed";
 
@@ -35,7 +36,7 @@ export const Contact = () => {
             )}
             target="_blank"
           >
-            <MessageCircle aria-hidden="true" className="mr-2" size={19} />
+            <FaWhatsapp aria-hidden="true" className="mr-2" size={19} />
             Escribir por WhatsApp
           </Button>
           <div className="mt-10 space-y-4 border-t border-white/10 pt-7 text-sm text-white/65">
