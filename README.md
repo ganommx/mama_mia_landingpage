@@ -60,4 +60,4 @@ La página se compone de componentes atómicos en `components/ui`, estructura gl
 
 ---
 
-Proyecto desarrollado por **Ganom** para **MamaMia** — Presencia digital que convierte.
+Proyecto desarrollado por **Ganom** para **MamáMía** — Presencia digital que convierte.
