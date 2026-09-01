@@ -256,7 +256,7 @@ export const DRESSES: Dress[] = [
     id: "18",
     name: "Negro cálido",
     price: 1000,
-    sizes: [""],
+    sizes: ["11"],
     color: ["negro"],
     colorHex: "#201C19",
     imageUrl: "/images/dresses/18.webp",
