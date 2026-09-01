@@ -49,7 +49,6 @@ npm run type-check
 ## Personalización
 
 - Catálogo y servicios: `constants/services.ts`
-<!-- - Testimonios: `constants/testimonials.ts`-->
 - Preguntas frecuentes: `constants/faq.ts`
 - Navegación: `constants/navigation.ts`
 - Paleta y tipografías: `tailwind.config.ts`
