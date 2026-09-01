@@ -12,6 +12,7 @@ import { NAVIGATION_ITEMS } from "@/constants/navigation";
 export const Footer = () => {
   const pathname = usePathname();
   const isHome = pathname === "/";
+  const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL ?? "";
 
   const resolveHref = (href: string) => {
     if (isHome) return href;
@@ -85,6 +86,14 @@ export const Footer = () => {
               <FaFacebook aria-hidden="true" size={18} />
             </a>
           </div>
+          {contactEmail && (
+            <a
+              className="mt-3 block w-fit ml-auto text-sm text-white/65 transition-colors hover:text-brand-primary"
+              href={`mailto:${contactEmail}`}
+            >
+              {contactEmail}
+            </a>
+          )}
         </div>
       </div>
 
