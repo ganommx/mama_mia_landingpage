@@ -17,6 +17,8 @@ export const Footer = () => {
   const resolveHref = (href: string) => {
     if (isHome) return href;
 
+    if (href === "#inicio") return "/";
+
     if (href.startsWith("#")) {
       return `/${href}`;
     }
@@ -88,7 +90,7 @@ export const Footer = () => {
           </div>
           {contactEmail && (
             <a
-              className="mt-3 block w-fit ml-auto text-sm text-white/65 transition-colors hover:text-brand-primary"
+              className="mt-3 block w-fit md:ml-auto text-sm text-white/65 transition-colors hover:text-brand-primary"
               href={`mailto:${contactEmail}`}
             >
               {contactEmail}

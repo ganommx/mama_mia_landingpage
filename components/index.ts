@@ -5,6 +5,7 @@ export { SectionTitle } from "./ui/SectionTitle";
 
 export { Navbar } from "./layout/Navbar";
 export { Footer } from "./layout/Footer";
+export { WhatsAppButton } from "./layout/WhatsAppButton";
 
 export { Hero } from "./sections/Hero";
 export { Services } from "./sections/Services";
