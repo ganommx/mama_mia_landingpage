@@ -1,6 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
@@ -15,18 +21,42 @@ export const Lightbox = ({
 }: LightboxProps) => {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [openKey, setOpenKey] = useState(0);
+  const boxRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
-      setVisible(true);
-      return;
+      setVisible(false);
+      setOpenKey((k) => k + 1);
+
+      const raf = requestAnimationFrame(() => setVisible(true));
+      return () => cancelAnimationFrame(raf);
     }
 
     setVisible(false);
-    const timer = setTimeout(() => setMounted(false), 400);
+    const timer = setTimeout(() => setMounted(false), 350);
     return () => clearTimeout(timer);
   }, [isOpen]);
+
+  useLayoutEffect(() => {
+    if (!mounted || !isOpen) return;
+    const box = boxRef.current;
+    if (!box) return;
+
+    box.style.transition = "none";
+    box.style.opacity = "0.85";
+    box.style.transform = "scale(0.97)";
+    void box.offsetWidth;
+
+    box.style.transition = "opacity 300ms ease-out, transform 300ms ease-out";
+
+    const raf = requestAnimationFrame(() => {
+      box.style.opacity = "1";
+      box.style.transform = "scale(1)";
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [mounted, openKey, isOpen]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -55,7 +85,7 @@ export const Lightbox = ({
       className={cn(
         "fixed inset-0 z-[200] flex items-center justify-center p-5 sm:p-8",
         "bg-black/80 backdrop-blur-sm",
-        "lightbox-fade",
+        "transition-opacity duration-300 ease-out",
         visible ? "opacity-100" : "pointer-events-none opacity-0",
       )}
       onClick={onClose}
@@ -71,12 +101,10 @@ export const Lightbox = ({
       </button>
 
       <div
-        className={cn(
-          "relative h-full max-h-[85vh] w-full max-w-3xl",
-          "transition-opacity duration-300 ease-out",
-          visible ? "opacity-100" : "opacity-0",
-        )}
+        className="relative h-full max-h-[85vh] w-full max-w-3xl"
+        key={openKey}
         onClick={(e) => e.stopPropagation()}
+        ref={boxRef}
       >
         <Image
           alt={alt}

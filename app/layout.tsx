@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+
 import "./globals.css";
 
 const inter = Inter({
@@ -78,6 +80,8 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           Saltar al contenido
         </a>
         {children}
+
+        <WhatsAppButton />
       </body>
     </html>
   );

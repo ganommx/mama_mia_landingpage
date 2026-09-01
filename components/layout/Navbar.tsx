@@ -21,6 +21,8 @@ export const Navbar = () => {
   const resolveHref = (href: string) => {
     if (href === "#catalogo" && !isHome) return "/catalogo";
 
+    if (href === "#inicio" && !isHome) return "/";
+
     if (!isHome && href.startsWith("#")) {
       return `/${href}`;
     }
