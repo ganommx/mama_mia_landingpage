@@ -32,7 +32,7 @@ export interface DressCardProps {
   name: string;
   price: number;
   sizes: string[];
-  color: string;
+  color: string[];
   colorHex: string;
   imageUrl: string;
   backImageUrl?: string;

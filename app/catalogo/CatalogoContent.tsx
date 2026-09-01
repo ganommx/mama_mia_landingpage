@@ -31,7 +31,7 @@ export const CatalogoContent = () => {
     return DRESSES.filter((dress) => {
       if (
         filters.colors.length > 0 &&
-        !filters.colors.includes(dress.color)
+        !dress.color.some((color) => filters.colors.includes(color))
       ) {
         return false;
       }

@@ -20,9 +20,11 @@ export const Hero = () => {
       <div className="mx-auto grid max-w-7xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1fr_0.88fr]">
         <div className="relative z-10">
           <Badge>Renta y venta de vestidos</Badge>
-          <h1 className="mt-6 max-w-3xl font-display text-5xl leading-[1.04] text-brand-secondary sm:text-6xl lg:text-7xl">
-            El vestido perfecto para tu{" "}
-            <span className="italic text-brand-primary">momento especial</span>
+          <h1 className="mt-6 max-w-3xl font-display text-5xl leading-[1.04] text-brand-secondary sm:text-6xl lg:text-[90px]">
+            Elegancia, confianza{" "}
+            <span className="italic text-brand-primary">
+              Momentos inolvidables
+            </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-brand-secondary/65">
             Diseños que celebran tu estilo, asesoría cercana y una experiencia
@@ -59,7 +61,7 @@ export const Hero = () => {
             </p>
             <p>
               <strong className="block text-xl text-brand-secondary">
-                XS–XG
+                Varias tallas
               </strong>{" "}
               tallas
             </p>

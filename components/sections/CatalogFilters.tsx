@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronDown, SlidersHorizontal, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DRESSES } from "@/constants/services";
 
 export interface FilterState {
   colors: string[];
@@ -27,10 +28,31 @@ export const COLOR_GROUPS = [
   { key: "verde", label: "Verde", hex: "#16A34A" },
   { key: "púrpura", label: "Púrpura", hex: "#9F3383" },
   { key: "gris", label: "Gris", hex: "#ACABBF" },
-  { key: "varios", label: "Varios", hex: "#BA9248" },
+  { key: "café", label: "Café", hex: "#A55F2A" },
+  { key: "blanco", label: "Blanco", hex: "#FFFFFF" },
+  {
+    key: "varios",
+    label: "Varios",
+    hex: "linear-gradient(135deg, #E91E63 10%, #F9D423 35%, #00A86B 100%, #045D90 80% )",
+  },
 ];
 
-export const SIZE_OPTIONS = ["XS", "CH", "M", "G", "XG"];
+const LETTER_INDEX: Record<string, number> = { S: 0, M: 1 };
+
+const sizeSortKey = (size: string): number => {
+  const numeric = size.match(/^\d+/);
+  if (numeric) return Number(numeric[0]);
+  return 1000 + (LETTER_INDEX[size] ?? 999);
+};
+
+export const SIZE_OPTIONS = Array.from(
+  new Set(
+    DRESSES.flatMap((dress) => dress.sizes).filter((s) => s.trim() !== ""),
+  ),
+).sort((a, b) => {
+  const diff = sizeSortKey(a) - sizeSortKey(b);
+  return diff !== 0 ? diff : a.length - b.length;
+});
 
 export const PRICE_RANGES = [
   { key: "all", label: "Todos" },
@@ -166,6 +188,25 @@ function FilterPill({
   );
 }
 
+function SizeGuide() {
+  return (
+    <div className="w-full">
+      <div className="border-t border-brand-secondary/10 pt-2.5">
+        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary">
+          Guía de tallas
+        </p>
+        <p className="mt-1.5 text-xs leading-relaxed text-brand-secondary/55">
+          Junior: 1, 3, 3/4, 5/6, 9/10, etc.
+          <br />
+          Señora: 0, 2, 4, 6, 8, 10 y 12.
+          <br />
+          Algunos modelos también están disponibles en tallas S y M.
+        </p>
+      </div>
+    </div>
+  );
+}
+
 /* ──────────────────────────────────────────────
    CatalogFilters
    ────────────────────────────────────────────── */
@@ -211,7 +252,10 @@ export const CatalogFilters = ({
     key: "priceRange" | "availability",
     value: string,
   ) => {
-    onFilterChange({ ...filters, [key]: value });
+    onFilterChange({
+      ...filters,
+      [key]: filters[key] === value && value !== "all" ? "all" : value,
+    });
   };
 
   const clearAll = () => onFilterChange(INITIAL_FILTERS);
@@ -336,6 +380,7 @@ export const CatalogFilters = ({
           </AccordionPanel>
           <AccordionPanel isOpen={openSection === "size"}>
             {renderSizeOptions()}
+            <SizeGuide />
           </AccordionPanel>
           <AccordionPanel isOpen={openSection === "price"}>
             {renderPriceOptions()}
@@ -394,7 +439,9 @@ export const CatalogFilters = ({
         </p>
 
         {/* Mobile expandable panel */}
-        <MobileFilterPanel open={mobileOpen} footer={
+        <MobileFilterPanel
+          open={mobileOpen}
+          footer={
             <button
               className="w-full rounded-full border border-brand-secondary/20 py-2 text-xs font-medium text-brand-secondary/60 transition-colors hover:border-brand-secondary/40 hover:text-brand-secondary"
               onClick={() => setMobileOpen(false)}
@@ -412,7 +459,9 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "color"}>
-            <div className="flex flex-wrap gap-2 px-1 pb-1 pt-2">{renderColorOptions()}</div>
+            <div className="flex flex-wrap gap-2 px-1 pb-1 pt-2">
+              {renderColorOptions()}
+            </div>
           </AccordionPanel>
 
           <AccordionHeader
@@ -423,7 +472,10 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "size"}>
-            <div className="px-1 pb-1 pt-2">{renderSizeOptions()}</div>
+            <div className="px-1 pb-1 pt-2">
+              {renderSizeOptions()}
+              <SizeGuide />
+            </div>
           </AccordionPanel>
 
           <AccordionHeader
@@ -445,9 +497,7 @@ export const CatalogFilters = ({
             compact
           />
           <AccordionPanel isOpen={openSection === "availability"}>
-            <div className="px-1 pb-1 pt-2">
-              {renderAvailabilityOptions()}
-            </div>
+            <div className="px-1 pb-1 pt-2">{renderAvailabilityOptions()}</div>
           </AccordionPanel>
         </MobileFilterPanel>
       </div>
@@ -472,9 +522,7 @@ function MobileFilterPanel({
       style={{ maxHeight: open ? "70vh" : "0px" }}
     >
       <div className="flex max-h-[70vh] flex-col rounded-2xl border border-brand-secondary/10 bg-white p-4 shadow-sm">
-        <div className="min-h-0 flex-1 overflow-y-auto">
-          {children}
-        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto">{children}</div>
         <div className="shrink-0 pt-3">{footer}</div>
       </div>
     </div>

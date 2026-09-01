@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
@@ -13,6 +13,21 @@ export const Lightbox = ({
   imageUrl,
   alt,
 }: LightboxProps) => {
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setMounted(true);
+      setVisible(true);
+      return;
+    }
+
+    setVisible(false);
+    const timer = setTimeout(() => setMounted(false), 400);
+    return () => clearTimeout(timer);
+  }, [isOpen]);
+
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -21,7 +36,7 @@ export const Lightbox = ({
   );
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!mounted) return;
 
     document.addEventListener("keydown", handleKeyDown);
     document.body.style.overflow = "hidden";
@@ -30,9 +45,9 @@ export const Lightbox = ({
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [isOpen, handleKeyDown]);
+  }, [mounted, handleKeyDown]);
 
-  if (!isOpen) return null;
+  if (!mounted) return null;
 
   return (
     <div
@@ -40,6 +55,8 @@ export const Lightbox = ({
       className={cn(
         "fixed inset-0 z-[200] flex items-center justify-center p-5 sm:p-8",
         "bg-black/80 backdrop-blur-sm",
+        "lightbox-fade",
+        visible ? "opacity-100" : "pointer-events-none opacity-0",
       )}
       onClick={onClose}
       role="dialog"
@@ -54,7 +71,11 @@ export const Lightbox = ({
       </button>
 
       <div
-        className="relative h-full max-h-[85vh] w-full max-w-3xl"
+        className={cn(
+          "relative h-full max-h-[85vh] w-full max-w-3xl",
+          "transition-opacity duration-300 ease-out",
+          visible ? "opacity-100" : "opacity-0",
+        )}
         onClick={(e) => e.stopPropagation()}
       >
         <Image

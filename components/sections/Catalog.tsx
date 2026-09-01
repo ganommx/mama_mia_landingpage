@@ -13,6 +13,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { SectionTitle } from "@/components/ui/SectionTitle";
+import { cn } from "@/lib/utils";
 
 const HOMEPAGE_DRESS_LIMIT = 6;
 
@@ -42,15 +43,42 @@ export const DressCard = ({
         onClick={() => setIsLightboxOpen(true)}
         type="button"
       >
+        <div
+          aria-hidden={hasBackView && showBack}
+          className={cn(
+            "absolute inset-0 transition-opacity duration-300",
+            hasBackView && showBack ? "opacity-0" : "opacity-100",
+          )}
+        >
         <Image
           alt={`Vestido ${name} en color ${color}`}
           className="object-contain transition-transform duration-500 group-hover:scale-[1.07]"
           fill
           quality={100}
           sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-          src={activeImageUrl}
+          src={imageUrl}
           style={{ transform: `scale(${imageScale})` }}
         />
+        </div>
+        {hasBackView && (
+          <div
+            aria-hidden={!showBack}
+            className={cn(
+              "absolute inset-0 transition-opacity duration-300",
+              showBack ? "opacity-100" : "opacity-0",
+            )}
+          >
+            <Image
+              alt={`Vestido ${name} en color ${color} (espalda)`}
+              className="object-contain transition-transform duration-500 group-hover:scale-[1.07]"
+              fill
+              quality={100}
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+              src={backImageUrl}
+              style={{ transform: `scale(${imageScale})` }}
+            />
+          </div>
+        )}
         <Badge className="absolute left-2 top-2 bg-white/90 !px-2 !py-0.5 !text-[10px] normal-case tracking-normal sm:left-4 sm:top-4 sm:!px-3 sm:!py-1 sm:!text-xs">
           {isAvailable ? "Disponible" : "Próximamente"}
         </Badge>
@@ -97,11 +125,10 @@ export const DressCard = ({
             <span
               className="mt-0.5 h-5 w-5 shrink-0 overflow-hidden rounded-full border border-brand-secondary/100 shadow-sm sm:mt-1 sm:h-7 sm:w-7"
               style={{ background: colorHex }}
-              aria-label={`Color: ${color}`}
-              title={color}
+              aria-label={`Color: ${color.join(", ")}`}
+              title={color.join(", ")}
             />
           </div>
-
           <p className="mt-[-14px] text-[11px] text-brand-secondary/55 sm:mt-[-20px] sm:text-sm">
             Tallas {sizes.join(" · ")}
           </p>
