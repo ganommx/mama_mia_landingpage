@@ -16,12 +16,14 @@ export const Lightbox = ({
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [openKey, setOpenKey] = useState(0);
+  const [panelSize, setPanelSize] = useState<{ width: number; height: number } | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
       setVisible(false);
       setOpenKey((k) => k + 1);
+      setPanelSize(null);
 
       const raf = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(raf);
@@ -75,9 +77,13 @@ export const Lightbox = ({
       </button>
 
       <div
-        className="relative h-full max-h-[85vh] w-full max-w-3xl overflow-hidden rounded-2xl"
+        className={cn(
+          "relative overflow-hidden rounded-2xl",
+          panelSize ? undefined : "h-full max-h-[85vh] w-full max-w-3xl",
+        )}
         key={openKey}
         onClick={(e) => e.stopPropagation()}
+        style={panelSize ? { width: panelSize.width, height: panelSize.height } : undefined}
       >
         <Image
           alt={alt}
@@ -85,6 +91,19 @@ export const Lightbox = ({
           fill
           sizes="(max-width: 768px) 100vw, 768px"
           src={imageUrl}
+          onLoad={(e) => {
+            const { naturalWidth, naturalHeight } = e.currentTarget;
+            if (!naturalWidth || !naturalHeight) return;
+            const padding = window.innerWidth >= 640 ? 64 : 40;
+            const scale = Math.min(
+              (window.innerWidth - padding) / naturalWidth,
+              (window.innerHeight * 0.85) / naturalHeight,
+            );
+            setPanelSize({
+              width: Math.max(1, Math.round(naturalWidth * scale)),
+              height: Math.max(1, Math.round(naturalHeight * scale)),
+            });
+          }}
         />
       </div>
     </div>

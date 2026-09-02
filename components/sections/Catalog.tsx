@@ -28,6 +28,7 @@ export const DressCard = ({
   isAvailable,
   colorHex,
   imageScale = 1.1,
+  onCardClick,
 }: DressCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -37,10 +38,14 @@ export const DressCard = ({
   const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha? También me gustaría conocer su precio de venta.`;
 
   return (
-    <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl">
+    <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl" onClick={onCardClick}>
       <button
         className="relative block aspect-[4/5] w-full overflow-hidden bg-brand-accent"
-        onClick={() => setIsLightboxOpen(true)}
+        onClick={(e) => {
+          if (onCardClick) return;
+          e.stopPropagation();
+          setIsLightboxOpen(true);
+        }}
         type="button"
       >
         <div
@@ -143,29 +148,31 @@ export const DressCard = ({
             </span>
           </div>
         </div>
-        <Button
-          className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
-          disabled={!isAvailable}
-          href={isAvailable ? generateWhatsAppLink(message) : undefined}
-          target="_blank"
-          variant={isAvailable ? "primary" : "outline"}
-        >
-          <FaWhatsapp
-            aria-hidden="true"
-            className="mr-1.5 text-[15px] sm:mr-2 sm:text-[17px]"
-          />
+        <div className="contents" onClick={(e) => e.stopPropagation()}>
+          <Button
+            className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
+            disabled={!isAvailable}
+            href={isAvailable ? generateWhatsAppLink(message) : undefined}
+            target="_blank"
+            variant={isAvailable ? "primary" : "outline"}
+          >
+            <FaWhatsapp
+              aria-hidden="true"
+              className="mr-1.5 text-[15px] sm:mr-2 sm:text-[17px]"
+            />
 
-          <span className="text-[11px] sm:text-sm">
-            {isAvailable ? (
-              <>
-                <span className="sm:hidden">Consultar</span>
-                <span className="hidden sm:inline">Consultar por WhatsApp</span>
-              </>
-            ) : (
-              "No disponible"
-            )}
-          </span>
-        </Button>
+            <span className="text-[11px] sm:text-sm">
+              {isAvailable ? (
+                <>
+                  <span className="sm:hidden">Consultar</span>
+                  <span className="hidden sm:inline">Consultar por WhatsApp</span>
+                </>
+              ) : (
+                "No disponible"
+              )}
+            </span>
+          </Button>
+        </div>
       </div>
       <Lightbox
         alt={`Vestido ${name} en color ${color}`}
