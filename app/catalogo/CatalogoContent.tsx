@@ -145,7 +145,7 @@ export const CatalogoContent = () => {
             >
               <X aria-hidden="true" size={18} />
             </button>
-            <DressCard {...selectedDress} />
+            <DressCard {...selectedDress} truncateName={false} />
           </div>
         </div>
       )}

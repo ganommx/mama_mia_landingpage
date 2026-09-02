@@ -39,6 +39,7 @@ export interface DressCardProps {
   isAvailable: boolean;
   imageScale?: number;
   onCardClick?: () => void;
+  truncateName?: boolean;
 }
 
 export interface LightboxProps {
