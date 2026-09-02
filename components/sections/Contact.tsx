@@ -65,7 +65,7 @@ export const Contact = () => {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             src={mapUrl || FALLBACK_MAP_URL}
-            title="Ubicación de MamaMia en Google Maps"
+            title="Ubicación de MamáMía en Google Maps"
           />
         </div>
       </div>

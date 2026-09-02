@@ -28,6 +28,8 @@ export const DressCard = ({
   isAvailable,
   colorHex,
   imageScale = 1.1,
+  onCardClick,
+  truncateName = true,
 }: DressCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
@@ -37,10 +39,14 @@ export const DressCard = ({
   const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha? También me gustaría conocer su precio de venta.`;
 
   return (
-    <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl">
+    <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl" onClick={onCardClick}>
       <button
         className="relative block aspect-[4/5] w-full overflow-hidden bg-brand-accent"
-        onClick={() => setIsLightboxOpen(true)}
+        onClick={(e) => {
+          if (onCardClick) return;
+          e.stopPropagation();
+          setIsLightboxOpen(true);
+        }}
         type="button"
       >
         <div
@@ -118,7 +124,12 @@ export const DressCard = ({
       <div className="p-3 sm:p-6">
         <div className="flex flex-col">
           <div className="flex min-h-[44px] items-start justify-between gap-2 sm:min-h-[64px] sm:gap-3">
-            <h3 className="line-clamp-2 font-display text-base leading-tight text-brand-secondary sm:text-2xl">
+            <h3
+              className={cn(
+                "font-display text-base leading-tight text-brand-secondary sm:text-2xl",
+                truncateName && "line-clamp-2",
+              )}
+            >
               {name}
             </h3>
 
@@ -129,7 +140,7 @@ export const DressCard = ({
               title={color.join(", ")}
             />
           </div>
-          <p className="mt-1 text-[11px] text-brand-secondary/55 sm:mt-[-20px] sm:text-sm">
+          <p className="mt-1 text-[11px] text-brand-secondary/55 sm:mt-2 sm:text-sm">
             Tallas {sizes.join(" · ")}
           </p>
 
@@ -143,29 +154,31 @@ export const DressCard = ({
             </span>
           </div>
         </div>
-        <Button
-          className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
-          disabled={!isAvailable}
-          href={isAvailable ? generateWhatsAppLink(message) : undefined}
-          target="_blank"
-          variant={isAvailable ? "primary" : "outline"}
-        >
-          <FaWhatsapp
-            aria-hidden="true"
-            className="mr-1.5 text-[15px] sm:mr-2 sm:text-[17px]"
-          />
+        <div className="contents" onClick={(e) => e.stopPropagation()}>
+          <Button
+            className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
+            disabled={!isAvailable}
+            href={isAvailable ? generateWhatsAppLink(message) : undefined}
+            target="_blank"
+            variant={isAvailable ? "primary" : "outline"}
+          >
+            <FaWhatsapp
+              aria-hidden="true"
+              className="mr-1.5 text-[15px] sm:mr-2 sm:text-[17px]"
+            />
 
-          <span className="text-[11px] sm:text-sm">
-            {isAvailable ? (
-              <>
-                <span className="sm:hidden">Consultar</span>
-                <span className="hidden sm:inline">Consultar por WhatsApp</span>
-              </>
-            ) : (
-              "No disponible"
-            )}
-          </span>
-        </Button>
+            <span className="text-[11px] sm:text-sm">
+              {isAvailable ? (
+                <>
+                  <span className="sm:hidden">Consultar</span>
+                  <span className="hidden sm:inline">Consultar por WhatsApp</span>
+                </>
+              ) : (
+                "No disponible"
+              )}
+            </span>
+          </Button>
+        </div>
       </div>
       <Lightbox
         alt={`Vestido ${name} en color ${color}`}

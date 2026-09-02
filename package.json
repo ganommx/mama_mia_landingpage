@@ -1,7 +1,7 @@
 {
-  "name": "mamamia",
+  "name": "mamámía",
   "version": "1.0.0",
-  "description": "Landing page de renta y venta de vestidos MamaMia",
+  "description": "Landing page de renta y venta de vestidos MamáMía",
   "private": true,
   "scripts": {
     "dev": "next dev",

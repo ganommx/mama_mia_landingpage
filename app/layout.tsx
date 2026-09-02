@@ -21,8 +21,8 @@ const playfairDisplay = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://mamamia.example.com"),
   title: {
-    default: "MamaMia — Renta y Venta de Vestidos",
-    template: "%s | MamaMia",
+    default: "MamaMía — Renta y Venta de Vestidos",
+    template: "%s | MamaMía",
   },
   description:
     "Vestidos de noche, quinceañera, graduación y boda en renta y venta, con asesoría personalizada.",
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_MX",
-    siteName: "MamaMia",
-    title: "MamaMia — El vestido perfecto para tu momento especial",
+    siteName: "MamaMía",
+    title: "MamaMía — El vestido perfecto para tu momento especial",
     description:
       "Renta y venta de vestidos con asesoría personalizada para cada ocasión.",
     images: [
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
         url: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&h=630&q=85",
         width: 1200,
         height: 630,
-        alt: "Colección de vestidos MamaMia",
+        alt: "Colección de vestidos Mamá Mía",
       },
     ],
   },

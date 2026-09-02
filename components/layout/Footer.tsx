@@ -69,7 +69,7 @@ export const Footer = () => {
 
           <div className="mt-4 flex gap-3 md:justify-end">
             <a
-              aria-label="Instagram de MamaMia"
+              aria-label="Instagram de MamáMía"
               className="rounded-full border border-white/15 p-3 hover:border-brand-primary hover:text-brand-primary"
               href="https://www.instagram.com/mamamia.337/"
               rel="noopener noreferrer"
@@ -79,7 +79,7 @@ export const Footer = () => {
             </a>
 
             <a
-              aria-label="Facebook de MamaMia"
+              aria-label="Facebook de MamáMía"
               className="rounded-full border border-white/15 p-3 hover:border-brand-primary hover:text-brand-primary"
               href="https://facebook.com"
               rel="noopener noreferrer"
@@ -101,7 +101,7 @@ export const Footer = () => {
 
       <div className="mx-auto flex max-w-7xl flex-col gap-2 pt-6 text-xs text-white/45 sm:flex-row sm:justify-between">
         <p>
-          © {new Date().getFullYear()} MamaMia. Todos los derechos reservados.
+          © {new Date().getFullYear()} MamáMía. Todos los derechos reservados.
         </p>
 
         <p>

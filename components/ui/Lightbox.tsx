@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
 import { X } from "lucide-react";
 
@@ -22,13 +16,14 @@ export const Lightbox = ({
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const [openKey, setOpenKey] = useState(0);
-  const boxRef = useRef<HTMLDivElement>(null);
+  const [panelSize, setPanelSize] = useState<{ width: number; height: number } | null>(null);
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true);
       setVisible(false);
       setOpenKey((k) => k + 1);
+      setPanelSize(null);
 
       const raf = requestAnimationFrame(() => setVisible(true));
       return () => cancelAnimationFrame(raf);
@@ -38,25 +33,6 @@ export const Lightbox = ({
     const timer = setTimeout(() => setMounted(false), 350);
     return () => clearTimeout(timer);
   }, [isOpen]);
-
-  useLayoutEffect(() => {
-    if (!mounted || !isOpen) return;
-    const box = boxRef.current;
-    if (!box) return;
-
-    box.style.transition = "none";
-    box.style.opacity = "0.85";
-    box.style.transform = "scale(0.97)";
-    void box.offsetWidth;
-
-    box.style.transition = "opacity 300ms ease-out, transform 300ms ease-out";
-
-    const raf = requestAnimationFrame(() => {
-      box.style.opacity = "1";
-      box.style.transform = "scale(1)";
-    });
-    return () => cancelAnimationFrame(raf);
-  }, [mounted, openKey, isOpen]);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -101,17 +77,33 @@ export const Lightbox = ({
       </button>
 
       <div
-        className="relative h-full max-h-[85vh] w-full max-w-3xl"
+        className={cn(
+          "relative overflow-hidden rounded-2xl",
+          panelSize ? undefined : "h-full max-h-[85vh] w-full max-w-3xl",
+        )}
         key={openKey}
         onClick={(e) => e.stopPropagation()}
-        ref={boxRef}
+        style={panelSize ? { width: panelSize.width, height: panelSize.height } : undefined}
       >
         <Image
           alt={alt}
-          className="object-contain"
+          className="animate-[lightbox-zoom_400ms_ease-out] object-contain rounded-2xl"
           fill
           sizes="(max-width: 768px) 100vw, 768px"
           src={imageUrl}
+          onLoad={(e) => {
+            const { naturalWidth, naturalHeight } = e.currentTarget;
+            if (!naturalWidth || !naturalHeight) return;
+            const padding = window.innerWidth >= 640 ? 64 : 40;
+            const scale = Math.min(
+              (window.innerWidth - padding) / naturalWidth,
+              (window.innerHeight * 0.85) / naturalHeight,
+            );
+            setPanelSize({
+              width: Math.max(1, Math.round(naturalWidth * scale)),
+              height: Math.max(1, Math.round(naturalHeight * scale)),
+            });
+          }}
         />
       </div>
     </div>

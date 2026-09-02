@@ -38,6 +38,8 @@ export interface DressCardProps {
   backImageUrl?: string;
   isAvailable: boolean;
   imageScale?: number;
+  onCardClick?: () => void;
+  truncateName?: boolean;
 }
 
 export interface LightboxProps {
