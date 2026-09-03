@@ -217,7 +217,7 @@ export const Catalog = () => {
           eyebrow="Colección destacada"
           title="Encuentra el vestido que habla de ti"
         />
-        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {DRESSES.slice(0, HOMEPAGE_DRESS_LIMIT).map((dress) => (
             <DressCard
               key={dress.id}
