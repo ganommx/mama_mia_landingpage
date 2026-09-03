@@ -51,7 +51,7 @@ export const DRESSES: Dress[] = [
     id: "1",
     name: "Rojo intenso",
     price: 1000,
-    sizes: [],
+    sizes: ["14"],
     color: ["rojo"],
     colorHex: "#D01B30",
     imageUrl: "/images/dresses/1.webp",
@@ -69,7 +69,7 @@ export const DRESSES: Dress[] = [
     backImageUrl: "/images/dresses/2-b.webp",
     category: DressCategory.GRADUATION,
     isAvailable: true,
-    imageScale: 1.07,
+    imageScale: 1.09,
   },
   {
     id: "3",
@@ -81,6 +81,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/3.webp",
     category: DressCategory.QUINCEANERA,
     isAvailable: true,
+    imageScale: 1.11,
   },
   {
     id: "4",
@@ -599,7 +600,7 @@ export const DRESSES: Dress[] = [
     backImageUrl: "/images/dresses/45-b.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
-    imageScale: 1.06,
+    imageScale: 1.13,
   },
   {
     id: "46",
