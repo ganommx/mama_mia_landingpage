@@ -87,7 +87,7 @@ export const Lightbox = ({
       >
         <Image
           alt={alt}
-          className="animate-[lightbox-zoom_400ms_ease-out] object-contain rounded-2xl"
+          className="animate-[lightbox-zoom_400ms_ease-out] object-contain"
           fill
           sizes="(max-width: 768px) 100vw, 768px"
           src={imageUrl}

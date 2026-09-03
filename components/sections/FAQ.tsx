@@ -9,9 +9,7 @@ import { SectionTitle } from "@/components/ui/SectionTitle";
 const EASE = "cubic-bezier(0.4, 0, 0.2, 1)";
 
 export const FAQ = () => {
-  const [openItemId, setOpenItemId] = useState<string | null>(
-    FAQ_ITEMS[0]?.id ?? null,
-  );
+  const [openItemId, setOpenItemId] = useState<string | null>(null);
   const contentRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   const getMaxHeight = (id: string) => {
@@ -66,9 +64,7 @@ export const FAQ = () => {
                   style={{
                     maxHeight: isOpen ? getMaxHeight(id) : "0px",
                     opacity: isOpen ? 1 : 0,
-                    transform: isOpen
-                      ? "translateY(0)"
-                      : "translateY(-4px)",
+                    transform: isOpen ? "translateY(0)" : "translateY(-4px)",
                     transitionTimingFunction: EASE,
                   }}
                 >

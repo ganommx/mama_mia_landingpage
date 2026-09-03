@@ -1,14 +1,14 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 
 import { DRESSES } from "@/constants/services";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { formatCurrency } from "@/lib/utils";
-import type { DressCardProps } from "@/types";
+import type { Dress, DressCardProps } from "@/types";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Lightbox } from "@/components/ui/Lightbox";
@@ -41,7 +41,7 @@ export const DressCard = ({
   return (
     <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl" onClick={onCardClick}>
       <button
-        className="relative block aspect-[4/5] w-full overflow-hidden bg-brand-accent"
+        className="relative block aspect-[4/5] w-full overflow-hidden rounded-t-xl bg-brand-accent sm:rounded-t-3xl"
         onClick={(e) => {
           if (onCardClick) return;
           e.stopPropagation();
@@ -190,30 +190,87 @@ export const DressCard = ({
   );
 };
 
-export const Catalog = () => (
-  <section className="bg-brand-soft px-5 py-20 sm:px-8 sm:py-28" id="catalogo">
-    <div className="mx-auto max-w-7xl">
-      <SectionTitle
-        description="Una selección para graduaciones, bodas, XV años y noches que merecen algo extraordinario."
-        eyebrow="Colección destacada"
-        title="Encuentra el vestido que habla de ti"
-      />
-      <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
-        {DRESSES.slice(0, HOMEPAGE_DRESS_LIMIT).map((dress) => (
-          <DressCard key={dress.id} {...dress} />
-        ))}
+export const Catalog = () => {
+  const [selectedDress, setSelectedDress] = useState<Dress | null>(null);
+
+  const handleCardModalKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setSelectedDress(null);
+  }, []);
+
+  useEffect(() => {
+    if (!selectedDress) return;
+
+    document.addEventListener("keydown", handleCardModalKeyDown);
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.removeEventListener("keydown", handleCardModalKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [selectedDress, handleCardModalKeyDown]);
+
+  return (
+    <section className="bg-brand-soft px-5 py-20 sm:px-8 sm:py-28" id="catalogo">
+      <div className="mx-auto max-w-7xl">
+        <SectionTitle
+          description="Una selección para graduaciones, bodas, XV años y noches que merecen algo extraordinario."
+          eyebrow="Colección destacada"
+          title="Encuentra el vestido que habla de ti"
+        />
+        <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
+          {DRESSES.slice(0, HOMEPAGE_DRESS_LIMIT).map((dress) => (
+            <DressCard
+              key={dress.id}
+              {...dress}
+              onCardClick={() => setSelectedDress(dress)}
+            />
+          ))}
+        </div>
+        <div className="mt-10 flex justify-center">
+          <Button href="/catalogo" variant="secondary">
+            Ver catálogo completo
+            <ArrowRight aria-hidden="true" className="ml-2" size={17} />
+          </Button>
+        </div>
+        <p className="mt-8 text-center text-sm text-brand-secondary/55">
+          Los precios mostrados corresponden únicamente a la renta de los
+          vestidos. Para consultar el precio de venta y disponibilidad,
+          contáctanos por WhatsApp.
+        </p>
       </div>
-      <div className="mt-10 flex justify-center">
-        <Button href="/catalogo" variant="secondary">
-          Ver catálogo completo
-          <ArrowRight aria-hidden="true" className="ml-2" size={17} />
-        </Button>
-      </div>
-      <p className="mt-8 text-center text-sm text-brand-secondary/55">
-        Los precios mostrados corresponden únicamente a la renta de los
-        vestidos. Para consultar el precio de venta y disponibilidad,
-        contáctanos por WhatsApp.
-      </p>
-    </div>
-  </section>
-);
+
+      {selectedDress && (
+        <div
+          aria-label="Tarjeta del vestido"
+          aria-modal="true"
+          className="fixed inset-0 z-[150] flex items-center justify-center overflow-y-auto bg-black/80 p-4 backdrop-blur-sm sm:p-8"
+          onClick={() => setSelectedDress(null)}
+          role="dialog"
+        >
+          <button
+            aria-label="Cerrar tarjeta del vestido"
+            className="absolute right-4 top-4 z-10 hidden rounded-full bg-white/10 p-2 text-white transition-colors hover:bg-white/25 sm:right-6 sm:top-6 sm:block"
+            onClick={() => setSelectedDress(null)}
+            type="button"
+          >
+            <X aria-hidden="true" size={24} />
+          </button>
+          <div
+            className="relative w-full max-w-[21rem] sm:max-w-[24rem]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              aria-label="Cerrar tarjeta del vestido"
+              className="absolute right-3 top-3 z-10 rounded-full bg-white/10 p-1.5 text-white transition-colors hover:bg-white/25 sm:hidden"
+              onClick={() => setSelectedDress(null)}
+              type="button"
+            >
+              <X aria-hidden="true" size={18} />
+            </button>
+            <DressCard {...selectedDress} truncateName={false} />
+          </div>
+        </div>
+      )}
+    </section>
+  );
+};

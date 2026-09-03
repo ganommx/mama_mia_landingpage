@@ -6,11 +6,13 @@ import { SearchX, X } from "lucide-react";
 import { DRESSES } from "@/constants/services";
 import { DressCard } from "@/components";
 import type { Dress } from "@/types";
+import { matchesSearch } from "@/lib/searchCatalog";
 import {
   CatalogFilters,
   INITIAL_FILTERS,
   type FilterState,
 } from "@/components/sections/CatalogFilters";
+import { CatalogSearch } from "@/components/sections/CatalogSearch";
 
 const matchesPriceRange = (price: number, range: string): boolean => {
   switch (range) {
@@ -27,14 +29,12 @@ const matchesPriceRange = (price: number, range: string): boolean => {
 
 export const CatalogoContent = () => {
   const [filters, setFilters] = useState<FilterState>(INITIAL_FILTERS);
+  const [search, setSearch] = useState("");
   const [selectedDress, setSelectedDress] = useState<Dress | null>(null);
 
-  const handleCardModalKeyDown = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedDress(null);
-    },
-    [],
-  );
+  const handleCardModalKeyDown = useCallback((e: KeyboardEvent) => {
+    if (e.key === "Escape") setSelectedDress(null);
+  }, []);
 
   useEffect(() => {
     if (!selectedDress) return;
@@ -50,6 +50,10 @@ export const CatalogoContent = () => {
 
   const filteredDresses = useMemo(() => {
     return DRESSES.filter((dress) => {
+      if (!matchesSearch(dress, search)) {
+        return false;
+      }
+
       if (
         filters.colors.length > 0 &&
         !dress.color.some((color) => filters.colors.includes(color))
@@ -78,17 +82,26 @@ export const CatalogoContent = () => {
 
       return true;
     });
-  }, [filters]);
+  }, [filters, search]);
 
   return (
     <>
       <div className="mt-8">
-        <CatalogFilters
-          filters={filters}
-          onFilterChange={setFilters}
-          totalResults={filteredDresses.length}
-          totalCount={DRESSES.length}
-        />
+        <div className="lg:flex lg:items-start lg:gap-8">
+          <div className="ms-auto w-full max-w-xl lg:ms-0 lg:order-2 lg:w-96 lg:shrink-0">
+            <CatalogSearch query={search} onQueryChange={setSearch} />
+          </div>
+          <div className="lg:order-1 lg:min-w-0 lg:flex-1">
+            <div className="mt-5 lg:mt-0">
+              <CatalogFilters
+                filters={filters}
+                onFilterChange={setFilters}
+                totalResults={filteredDresses.length}
+                totalCount={DRESSES.length}
+              />
+            </div>
+          </div>
+        </div>
       </div>
 
       {filteredDresses.length > 0 ? (
@@ -131,7 +144,7 @@ export const CatalogoContent = () => {
             onClick={() => setSelectedDress(null)}
             type="button"
           >
-<X aria-hidden="true" size={24} />
+            <X aria-hidden="true" size={24} />
           </button>
           <div
             className="relative w-full max-w-[21rem] sm:max-w-[24rem]"

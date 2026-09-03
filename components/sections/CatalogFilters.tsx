@@ -188,25 +188,6 @@ function FilterPill({
   );
 }
 
-function SizeGuide() {
-  return (
-    <div className="w-full">
-      <div className="border-t border-brand-secondary/10 pt-2.5">
-        <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-brand-primary">
-          Guía de tallas
-        </p>
-        <p className="mt-1.5 text-xs leading-relaxed text-brand-secondary/55">
-          Junior: 1, 3, 3/4, 5/6, 9/10, etc.
-          <br />
-          Señora: 0, 2, 4, 6, 8, 10 y 12.
-          <br />
-          Algunos modelos también están disponibles en tallas S y M.
-        </p>
-      </div>
-    </div>
-  );
-}
-
 /* ──────────────────────────────────────────────
    CatalogFilters
    ────────────────────────────────────────────── */
@@ -380,7 +361,6 @@ export const CatalogFilters = ({
           </AccordionPanel>
           <AccordionPanel isOpen={openSection === "size"}>
             {renderSizeOptions()}
-            <SizeGuide />
           </AccordionPanel>
           <AccordionPanel isOpen={openSection === "price"}>
             {renderPriceOptions()}
@@ -474,7 +454,7 @@ export const CatalogFilters = ({
           <AccordionPanel isOpen={openSection === "size"}>
             <div className="px-1 pb-1 pt-2">
               {renderSizeOptions()}
-              <SizeGuide />
+              {/* <SizeGuide /> */}
             </div>
           </AccordionPanel>
 
