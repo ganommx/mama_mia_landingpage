@@ -30,6 +30,8 @@ const STOPWORDS = new Set([
   "vestido",
   "para",
   "de",
+  "del",
+  "color",
   "en",
   "con",
   "un",
@@ -90,6 +92,18 @@ const getCategoryIntent = (tokens: string[]): { kind: DressCategory } | null => 
 
 const isCategoryToken = (t: string): boolean => Boolean(CATEGORY_KEYWORDS[t]);
 
+const getTermCandidates = (word: string): string[] => {
+  const candidates = new Set<string>([word]);
+  if (word.length > 2) {
+    if (word.endsWith("es")) candidates.add(word.slice(0, -2));
+    if (word.endsWith("s")) candidates.add(word.slice(0, -1));
+  }
+  return [...candidates];
+};
+
+const termMatches = (haystack: string, term: string): boolean =>
+  getTermCandidates(term).some((candidate) => haystack.includes(candidate));
+
 export const matchesSearch = (dress: Dress, query: string): boolean => {
   const normalized = normalize(query);
   if (!normalized) return true;
@@ -103,7 +117,7 @@ export const matchesSearch = (dress: Dress, query: string): boolean => {
     const haystack = dressHaystack(dress);
     for (const t of tokens) {
       if (STOPWORDS.has(t) || isCategoryToken(t)) continue;
-      if (!haystack.includes(t)) return false;
+      if (!termMatches(haystack, t)) return false;
     }
     return true;
   }
@@ -111,7 +125,7 @@ export const matchesSearch = (dress: Dress, query: string): boolean => {
   const haystack = dressHaystack(dress);
   for (const t of tokens) {
     if (STOPWORDS.has(t)) continue;
-    if (!haystack.includes(t)) return false;
+    if (!termMatches(haystack, t)) return false;
   }
   return true;
 };
