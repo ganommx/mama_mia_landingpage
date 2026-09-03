@@ -105,7 +105,7 @@ export const CatalogoContent = () => {
       </div>
 
       {filteredDresses.length > 0 ? (
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredDresses.map((dress) => (
             <DressCard
               key={dress.id}
