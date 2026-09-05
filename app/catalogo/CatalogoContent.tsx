@@ -147,7 +147,7 @@ export const CatalogoContent = () => {
             <X aria-hidden="true" size={24} />
           </button>
           <div
-            className="relative w-full max-w-[21rem] sm:max-w-[24rem]"
+            className="catalog-card-modal relative w-full max-w-[21rem] sm:max-w-[24rem]"
             onClick={(e) => e.stopPropagation()}
           >
             <button

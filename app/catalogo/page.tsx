@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { Footer, Navbar, SectionTitle } from "@/components";
+import { Footer, Navbar, ScrollToTopButton, SectionTitle } from "@/components";
 import { CatalogoContent } from "./CatalogoContent";
 
 export const metadata: Metadata = {
@@ -14,7 +14,10 @@ export default function CatalogoPage() {
     <>
       <Navbar />
       <main id="main-content">
-        <section className="bg-brand-soft px-5 pt-28 pb-20 sm:px-8 sm:pt-36 sm:pb-28">
+        <section
+          className="bg-brand-soft px-5 pt-28 pb-20 sm:px-8 sm:pt-36 sm:pb-28"
+          id="catalogo"
+        >
           <div className="mx-auto max-w-7xl">
             <SectionTitle
               description="Explora todos nuestros vestidos disponibles para renta y venta. Encuentra la pieza perfecta para tu ocasión especial."
@@ -31,6 +34,7 @@ export default function CatalogoPage() {
         </section>
       </main>
       <Footer />
+      <ScrollToTopButton />
     </>
   );
 }
