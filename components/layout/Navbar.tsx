@@ -33,7 +33,7 @@ export const Navbar = () => {
     <header className="fixed inset-x-0 top-0 z-50 border-b border-brand-secondary/10 bg-brand-soft/95 backdrop-blur-md">
       <nav
         aria-label="Navegación principal"
-        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
+        className="relative mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8"
       >
         <a className="flex items-center" href={isHome ? "#inicio" : "/"}>
           <Image
@@ -43,7 +43,7 @@ export const Navbar = () => {
           />
         </a>
 
-        <div className="hidden items-center gap-7 lg:flex">
+        <div className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 items-center gap-7 lg:flex">
           {NAVIGATION_ITEMS.map(({ href, label }) => (
             <a
               key={href}

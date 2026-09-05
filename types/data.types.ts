@@ -41,6 +41,16 @@ export interface Dress {
   isAvailable: boolean;
   imageScale?: number;
 }
+
+export interface Bag {
+  id: string;
+  name?: string;
+  color?: string[];
+  colorHex?: string;
+  price?: number;
+  imageUrl?: string;
+  isAvailable?: boolean;
+}
 export interface Testimonial {
   id: string;
   name: string;

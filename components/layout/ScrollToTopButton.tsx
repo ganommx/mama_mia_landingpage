@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 500;
 
-export const ScrollToTopButton = () => {
+export const ScrollToTopButton = ({ targetId = "catalogo" }: { targetId?: string }) => {
   const [scrolled, setScrolled] = useState(false);
   const [footerVisible, setFooterVisible] = useState(false);
 
@@ -34,7 +34,7 @@ export const ScrollToTopButton = () => {
 
   const handleClick = () => {
     document
-      .getElementById("catalogo")
+      .getElementById(targetId)
       ?.scrollIntoView({ behavior: "smooth", block: "start" });
   };
 

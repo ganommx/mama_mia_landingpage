@@ -42,6 +42,17 @@ export interface DressCardProps {
   truncateName?: boolean;
 }
 
+export interface BagCardProps {
+  id: string;
+  name?: string;
+  color?: string[];
+  colorHex?: string;
+  price?: number;
+  imageUrl?: string;
+  isAvailable?: boolean;
+  onCardClick?: () => void;
+}
+
 export interface LightboxProps {
   isOpen: boolean;
   onClose: () => void;

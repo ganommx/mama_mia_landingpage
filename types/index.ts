@@ -1,5 +1,6 @@
 export type {
   BadgeProps,
+  BagCardProps,
   ButtonProps,
   ButtonVariant,
   DressCardProps,
@@ -11,6 +12,7 @@ export {
   ServiceIcon,
 } from './data.types'
 export type {
+  Bag,
   Dress,
   FaqItem,
   NavigationItem,
