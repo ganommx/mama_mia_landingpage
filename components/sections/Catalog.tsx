@@ -39,7 +39,10 @@ export const DressCard = ({
   const message = `Hola, me interesa el vestido ${name} (${id}). ¿Está disponible para mi fecha? También me gustaría conocer su precio de venta.`;
 
   return (
-    <article className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl" onClick={onCardClick}>
+    <article
+      className="group overflow-hidden rounded-xl bg-white shadow-soft sm:rounded-3xl"
+      onClick={onCardClick}
+    >
       <button
         className="relative block aspect-[4/5] w-full overflow-hidden rounded-t-xl bg-brand-accent sm:rounded-t-3xl"
         onClick={(e) => {
@@ -56,15 +59,15 @@ export const DressCard = ({
             hasBackView && showBack ? "opacity-0" : "opacity-100",
           )}
         >
-        <Image
-          alt={`Vestido ${name} en color ${color}`}
-          className="object-contain transition-transform duration-500 group-hover:scale-[1.07]"
-          fill
-          quality={100}
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
-          src={imageUrl}
-          style={{ transform: `scale(${imageScale})` }}
-        />
+          <Image
+            alt={`Vestido ${name} en color ${color}`}
+            className="object-contain transition-transform duration-500 group-hover:scale-[1.07]"
+            fill
+            quality={100}
+            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 33vw"
+            src={imageUrl}
+            style={{ transform: `scale(${imageScale})` }}
+          />
         </div>
         {hasBackView && (
           <div
@@ -140,16 +143,19 @@ export const DressCard = ({
               title={color.join(", ")}
             />
           </div>
-          <p className="mt-1 text-[11px] text-brand-secondary/55 sm:mt-2 sm:text-sm">
-            Tallas {sizes.join(" · ")}
+          <p className="mt-1 text-[11px] text-brand-secondary/60 sm:mt-2 sm:text-sm">
+            Tallas{" "}
+            <span className="font-semibold text-brand-secondary/85">
+              {sizes.join(" · ")}
+            </span>
           </p>
 
           <div className="mt-1.5 flex items-center justify-between sm:mt-3">
-            <span className="rounded-md bg-brand-soft px-1.5 py-[3px] text-[10px] text-brand-secondary/55 sm:px-2 sm:py-[5px] sm:text-xs">
+            <span className="rounded-md bg-brand-accent px-1.5 py-[3px] text-[10px] font-medium text-brand-secondary/75 sm:px-2 sm:py-[5px] sm:text-xs">
               Precio de renta
             </span>
 
-            <span className="whitespace-nowrap text-[13px] font-semibold text-brand-secondary sm:text-base">
+            <span className="whitespace-nowrap text-[13px] font-bold text-brand-secondary sm:text-base">
               {formatCurrency(price)}
             </span>
           </div>
@@ -171,7 +177,9 @@ export const DressCard = ({
               {isAvailable ? (
                 <>
                   <span className="sm:hidden">Consultar</span>
-                  <span className="hidden sm:inline">Consultar por WhatsApp</span>
+                  <span className="hidden sm:inline">
+                    Consultar por WhatsApp
+                  </span>
                 </>
               ) : (
                 "No disponible"
@@ -210,7 +218,10 @@ export const Catalog = () => {
   }, [selectedDress, handleCardModalKeyDown]);
 
   return (
-    <section className="bg-brand-soft px-5 py-20 sm:px-8 sm:py-28" id="catalogo">
+    <section
+      className="bg-brand-soft px-5 py-20 sm:px-8 sm:py-28"
+      id="catalogo"
+    >
       <div className="mx-auto max-w-7xl">
         <SectionTitle
           description="Una selección para graduaciones, bodas, XV años y noches que merecen algo extraordinario."
@@ -256,7 +267,7 @@ export const Catalog = () => {
             <X aria-hidden="true" size={24} />
           </button>
           <div
-            className="relative w-full max-w-[21rem] sm:max-w-[24rem]"
+            className="catalog-card-modal relative w-full max-w-[21rem] sm:max-w-[24rem]"
             onClick={(e) => e.stopPropagation()}
           >
             <button
