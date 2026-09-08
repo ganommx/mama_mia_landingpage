@@ -13,7 +13,7 @@ import { Button } from "@/components/ui/Button";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
-const BAG_PREVIEW_LIMIT = 3;
+const BAG_PREVIEW_LIMIT = 4;
 
 const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
@@ -125,16 +125,15 @@ export const BagsContent = ({ preview = false }: BagsContentProps) => {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {visibleBags.map((bag, index) => (
-          <div
-            key={bag.id}
-            className={
-              preview && index === BAG_PREVIEW_LIMIT - 1
-                ? "col-span-2 w-[calc(50%_-_6px)] justify-self-center sm:col-span-1 sm:w-auto sm:justify-self-auto"
-                : undefined
-            }
-          >
+      <div
+        className={
+          preview
+            ? "grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            : "grid grid-cols-2 gap-3 sm:gap-7 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4"
+        }
+      >
+        {visibleBags.map((bag) => (
+          <div key={bag.id}>
             <BagCard {...bag} onCardClick={() => setSelectedBag(bag)} />
           </div>
         ))}
