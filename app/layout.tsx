@@ -22,7 +22,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mamamialuxury.com"),
+  metadataBase: new URL("https://www.mamamialuxury.com"),
   icons: {
     icon: [
       { url: "/favicon.ico" },
