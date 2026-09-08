@@ -25,6 +25,7 @@ const BagCard = ({
   colorHex,
   isAvailable = true,
   imageScale = 1.48,
+  imageOffsetY = 0,
   onCardClick,
 }: BagCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
@@ -58,7 +59,7 @@ const BagCard = ({
             quality={100}
             sizes="(max-width: 640px) 50vw, 33vw"
             src={imageUrl}
-            style={{ transform: `scale(${imageScale})` }}
+            style={{ transform: `scale(${imageScale}) translateY(${imageOffsetY}px)` }}
           />
         ) : (
           <span className="absolute inset-0 flex items-center justify-center">

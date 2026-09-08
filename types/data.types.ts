@@ -52,6 +52,7 @@ export interface Bag {
   imageUrl?: string;
   isAvailable?: boolean;
   imageScale?: number;
+  imageOffsetY?: number;
 }
 export interface Testimonial {
   id: string;

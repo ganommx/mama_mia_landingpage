@@ -16,7 +16,7 @@ export const SERVICES: Service[] = [
     icon: ServiceIcon.SHOPPING_BAG,
   },
   {
-    title: "Venta de bolsas",
+    title: "Renta de bolsas",
     description:
       "Complementa tu look con nuestras bolsas elegantes y versátiles.",
     icon: ServiceIcon.ACCESSORIES,

@@ -52,6 +52,7 @@ export interface BagCardProps {
   isAvailable?: boolean;
   onCardClick?: () => void;
   imageScale?: number;
+  imageOffsetY?: number;
 }
 
 export interface LightboxProps {
