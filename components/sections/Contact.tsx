@@ -48,14 +48,38 @@ export const Contact = () => {
               />
               {address}
             </p>
-            <p className="flex items-start gap-3">
+            <div className="flex items-start gap-3">
               <Clock3
                 aria-hidden="true"
                 className="mt-0.5 shrink-0 text-brand-primary"
                 size={18}
               />
-              Lunes a sábado · 10:00 a 19:00 h
-            </p>
+              <div className="min-w-0 flex-1">
+                <p className="font-semibold text-white">Horario de atención</p>
+                <dl className="mt-3 space-y-3">
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-medium text-white">
+                      Lunes – Viernes
+                    </dt>
+                    <dd className="text-right leading-relaxed">
+                      10:30 a. m. – 2:30 p. m.
+                      <br />
+                      5:00 p. m. – 8:30 p. m.
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-medium text-white">Sábado</dt>
+                    <dd className="text-right">
+                      11:00 a. m. – 3:00 p. m.
+                    </dd>
+                  </div>
+                  <div className="flex items-baseline justify-between gap-4">
+                    <dt className="font-medium text-white">Domingo</dt>
+                    <dd className="text-right">Cerrado</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
           </div>
         </div>
         <div className="min-h-96 bg-brand-accent">

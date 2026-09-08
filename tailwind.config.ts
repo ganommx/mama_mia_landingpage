@@ -7,6 +7,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        '2xl': '1536px',
+      },
       colors: {
         brand: {
           primary: '#C9A96E',

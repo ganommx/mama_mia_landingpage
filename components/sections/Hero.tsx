@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ArrowDown, MessageCircle } from "lucide-react";
 
@@ -7,10 +8,44 @@ import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { DRESSES } from "@/constants/services";
+import { cn } from "@/lib/utils";
 import { FaWhatsapp } from "react-icons/fa";
+
+const HERO_DRESS_IDS = [
+  "6",
+  "12",
+  "54",
+  "40",
+  "5",
+  "9",
+  "19",
+  "13",
+  "11",
+  "10",
+  "8",
+  "7",
+  "4",
+  "3",
+  "2",
+  "1",
+];
+
+const HERO_DRESSES = HERO_DRESS_IDS.flatMap((id) => {
+  const dress = DRESSES.find((dress) => dress.id === id);
+  return dress ? [dress] : [];
+});
 
 export const Hero = () => {
   const { generateWhatsAppLink } = useWhatsApp();
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActiveIndex((current) => (current + 1) % HERO_DRESSES.length);
+    }, 4000);
+
+    return () => window.clearInterval(id);
+  }, []);
 
   return (
     <section
@@ -49,7 +84,7 @@ export const Hero = () => {
           <div className="mt-10 flex gap-8 border-t border-brand-secondary/10 pt-6 text-sm text-brand-secondary/60">
             <p>
               <strong className="block text-xl text-brand-secondary">
-                +40
+                +70
               </strong>{" "}
               vestidos
             </p>
@@ -71,14 +106,24 @@ export const Hero = () => {
         <div className="relative mx-auto w-full max-w-lg">
           <div className="absolute -inset-6 rounded-[3rem] border border-brand-primary/30 sm:-inset-8" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2.5rem] shadow-soft">
-            <Image
-              alt="Mujer luciendo un elegante vestido de noche color dorado"
-              className="object-cover"
-              fill
-              priority
-              sizes="(max-width: 1024px) 90vw, 42vw"
-              src={DRESSES[5].imageUrl}
-            />
+            {HERO_DRESSES.map(
+              ({ id, name, color, imageUrl, imageScale }, i) => (
+                <Image
+                  alt={`Vestido ${name} en color ${color.join(", ")}`}
+                  aria-hidden={i !== activeIndex}
+                  className={cn(
+                    "object-cover transition-opacity duration-700",
+                    i === activeIndex ? "opacity-100" : "opacity-0",
+                  )}
+                  fill
+                  key={id}
+                  priority={i === 0}
+                  sizes="(max-width: 1024px) 90vw, 42vw"
+                  src={imageUrl}
+                  style={{ transform: `scale(${imageScale ?? 1.1})` }}
+                />
+              ),
+            )}
           </div>
           <div className="absolute -bottom-5 -left-3 rounded-2xl bg-white px-5 py-4 shadow-soft sm:-left-10">
             <p className="font-display text-lg">Tu ocasión, tu estilo</p>

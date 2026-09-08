@@ -6,9 +6,10 @@ export enum DressCategory {
 }
 
 export enum ServiceIcon {
-  SPARKLES = "sparkles",
-  SHOPPING_BAG = "shopping-bag",
-  HEART_HANDSHAKE = "heart-handshake",
+  SPARKLES = "SPARKLES",
+  SHOPPING_BAG = "SHOPPING_BAG",
+  HEART_HANDSHAKE = "HEART_HANDSHAKE",
+  ACCESSORIES = "ACCESSORIES",
 }
 
 export interface NavigationItem {
@@ -40,6 +41,18 @@ export interface Dress {
   category: DressCategory;
   isAvailable: boolean;
   imageScale?: number;
+}
+
+export interface Bag {
+  id: string;
+  name?: string;
+  color?: string[];
+  colorHex?: string;
+  price?: number;
+  imageUrl?: string;
+  isAvailable?: boolean;
+  imageScale?: number;
+  imageOffsetY?: number;
 }
 export interface Testimonial {
   id: string;

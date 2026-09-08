@@ -12,5 +12,6 @@ export { Hero } from "./sections/Hero";
 export { Services } from "./sections/Services";
 export { HowItWorks } from "./sections/HowItWorks";
 export { Catalog, DressCard } from "./sections/Catalog";
+export { Bags } from "./sections/Bags";
 export { FAQ } from "./sections/FAQ";
 export { Contact } from "./sections/Contact";

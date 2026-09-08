@@ -1,4 +1,5 @@
 import {
+  Bags,
   Catalog,
   Contact,
   FAQ,
@@ -18,6 +19,7 @@ export default function HomePage() {
         <Services />
         <HowItWorks />
         <Catalog />
+        <Bags />
         <FAQ />
         <Contact />
       </main>

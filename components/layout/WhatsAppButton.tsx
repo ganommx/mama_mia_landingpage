@@ -12,7 +12,7 @@ export const WhatsAppButton = () => {
     <a
       aria-label="Contactar por WhatsApp"
       className={cn(
-        "fixed bottom-5 right-5 z-[150] flex h-14 w-14 items-center justify-center rounded-full",
+        "fixed bottom-5 left-5 z-[150] flex h-14 w-14 items-center justify-center rounded-full",
         "bg-[#25D366] text-white shadow-[0_8px_24px_rgba(37,211,102,0.4)]",
         "transition-colors duration-300 ease-out",
         "md:hover:bg-brand-accent md:hover:text-brand-secondary",

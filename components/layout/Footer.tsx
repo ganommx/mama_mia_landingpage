@@ -81,7 +81,7 @@ export const Footer = () => {
             <a
               aria-label="Facebook de MamáMía"
               className="rounded-full border border-white/15 p-3 hover:border-brand-primary hover:text-brand-primary"
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/1DDERdkv6z/?mibextid=wwXIfr"
               rel="noopener noreferrer"
               target="_blank"
             >

@@ -31,4 +31,10 @@ export const FAQ_ITEMS: FaqItem[] = [
     answer:
       "Contamos con posibles ajustes de costura básica. Por ello, es importante acudir al menos 6 días antes de tu evento para realizar cualquier ajuste que sea necesario.",
   },
+  {
+    id: "bolsas",
+    question: "¿Las bolsas están disponibles para venta?",
+    answer:
+      "Por el momento, nuestras bolsas están disponibles únicamente para renta. Sin embargo, estamos considerando la opción de venta en el futuro.",
+  },
 ];

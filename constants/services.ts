@@ -16,6 +16,12 @@ export const SERVICES: Service[] = [
     icon: ServiceIcon.SHOPPING_BAG,
   },
   {
+    title: "Renta de bolsas",
+    description:
+      "Complementa tu look con nuestras bolsas elegantes y versátiles.",
+    icon: ServiceIcon.ACCESSORIES,
+  },
+  {
     title: "Asesoría personalizada",
     description:
       "Te ayudamos a elegir el corte, color y talla que mejor realzan tu estilo.",
@@ -206,9 +212,9 @@ export const DRESSES: Dress[] = [
   },
   {
     id: "14",
-    name: "Cobré rosado",
+    name: "Cobre rosado",
     price: 900,
-    sizes: ["M"],
+    sizes: ["1"],
     color: ["rosa"],
     colorHex: "#936152",
     imageUrl: "/images/dresses/14.webp",
@@ -239,7 +245,7 @@ export const DRESSES: Dress[] = [
     backImageUrl: "/images/dresses/16-b.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
-    imageScale: 1.1,
+    imageScale: 1.19,
   },
   {
     id: "17",
@@ -877,6 +883,18 @@ export const DRESSES: Dress[] = [
     colorHex: "#DFD2C2",
     imageUrl: "/images/dresses/67.webp",
     backImageUrl: "/images/dresses/67-b.webp",
+    category: DressCategory.EVENING,
+    isAvailable: true,
+    imageScale: 1.32,
+  },
+  {
+    id: "68",
+    name: "Rojo carmín",
+    price: 1000,
+    sizes: ["8"],
+    color: ["rojo"],
+    colorHex: "#C80B32",
+    imageUrl: "/images/dresses/68.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
     imageScale: 1.32,

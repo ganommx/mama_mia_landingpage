@@ -15,7 +15,7 @@ import { Lightbox } from "@/components/ui/Lightbox";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 import { cn } from "@/lib/utils";
 
-const HOMEPAGE_DRESS_LIMIT = 6;
+const HOMEPAGE_DRESS_LIMIT = 4;
 
 export const DressCard = ({
   id,
