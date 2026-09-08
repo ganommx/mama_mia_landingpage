@@ -49,7 +49,7 @@ export const Hero = () => {
           <div className="mt-10 flex gap-8 border-t border-brand-secondary/10 pt-6 text-sm text-brand-secondary/60">
             <p>
               <strong className="block text-xl text-brand-secondary">
-                +40
+                +70
               </strong>{" "}
               vestidos
             </p>

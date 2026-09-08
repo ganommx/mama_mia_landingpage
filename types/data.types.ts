@@ -6,9 +6,10 @@ export enum DressCategory {
 }
 
 export enum ServiceIcon {
-  SPARKLES = "sparkles",
-  SHOPPING_BAG = "shopping-bag",
-  HEART_HANDSHAKE = "heart-handshake",
+  SPARKLES = "SPARKLES",
+  SHOPPING_BAG = "SHOPPING_BAG",
+  HEART_HANDSHAKE = "HEART_HANDSHAKE",
+  ACCESSORIES = "ACCESSORIES",
 }
 
 export interface NavigationItem {

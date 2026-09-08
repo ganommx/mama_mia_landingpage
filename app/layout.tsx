@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
+/*
+import { WhatsAppButton } from "@/components/layout/WhatsAppButton";*/
 
 import "./globals.css";
 
@@ -88,8 +90,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           Saltar al contenido
         </a>
         {children}
-
-        <WhatsAppButton />
+        <Analytics />
       </body>
     </html>
   );
