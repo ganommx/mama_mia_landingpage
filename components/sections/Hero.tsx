@@ -56,14 +56,14 @@ export const Hero = () => {
         <div className="relative z-10">
           <Badge>Renta y venta de vestidos</Badge>
           <h1 className="mt-6 max-w-3xl font-display text-5xl leading-[1.04] text-brand-secondary sm:text-6xl lg:text-[90px]">
-            Elegancia, confianza{" "}
+            Renta y venta de vestidos para{" "}
             <span className="italic text-brand-primary">
-              Momentos inolvidables
+              momentos inolvidables
             </span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-8 text-brand-secondary/65">
-            Diseños que celebran tu estilo, asesoría cercana y una experiencia
-            sencilla para que solo te preocupes por disfrutar.
+            Encuentra el vestido ideal para tu ocasión especial en Zamora de
+            Hidalgo, Michoacán, con asesoría cercana y una experiencia sencilla.
           </p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button href="#catalogo" variant="secondary">

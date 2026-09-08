@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Inter, Playfair_Display } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { LocalBusinessJsonLd } from "@/components/seo/LocalBusinessJsonLd";
 
 /*
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";*/
@@ -21,7 +22,7 @@ const playfairDisplay = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://mamamia.example.com"),
+  metadataBase: new URL("https://mamamialuxury.com"),
   icons: {
     icon: [
       { url: "/favicon.ico" },
@@ -31,17 +32,18 @@ export const metadata: Metadata = {
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
   title: {
-    default: "MamaMía — Renta y Venta de Vestidos",
-    template: "%s | MamaMía",
+    default: "Renta de Vestidos en Zamora | Mamá Mía Luxury Dresses",
+    template: "%s | Mamá Mía",
   },
   description:
-    "Vestidos de noche, quinceañera, graduación y boda en renta y venta, con asesoría personalizada.",
+    "Renta y venta de vestidos de fiesta en Zamora de Hidalgo, Michoacán. Encuentra vestidos para eventos y ocasiones especiales, además de bolsas y asesoría personalizada.",
   keywords: [
-    "renta de vestidos",
-    "vestidos de noche",
-    "vestidos de quinceañera",
-    "vestidos de graduación",
-    "venta de vestidos",
+    "renta de vestidos en Zamora",
+    "vestidos de fiesta en Zamora",
+    "vestidos para eventos en Zamora",
+    "vestidos de noche en Zamora",
+    "venta de vestidos en Zamora",
+    "bolsas para fiesta en Zamora",
   ],
   authors: [{ name: "Ganom" }],
   creator: "Ganom",
@@ -49,15 +51,15 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_MX",
     siteName: "MamaMía",
-    title: "MamaMía — El vestido perfecto para tu momento especial",
+    title: "Renta de Vestidos en Zamora | Mamá Mía Luxury Dresses",
     description:
-      "Renta y venta de vestidos con asesoría personalizada para cada ocasión.",
+      "Renta y venta de vestidos de fiesta en Zamora de Hidalgo, Michoacán. Encuentra vestidos para eventos y ocasiones especiales, además de bolsas y asesoría personalizada.",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?auto=format&fit=crop&w=1200&h=630&q=85",
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Colección de vestidos Mamá Mía",
+        alt: "Mama Mía Luxury Dresses — Renta y venta de vestidos en Zamora",
       },
     ],
   },
@@ -90,6 +92,7 @@ export default function RootLayout({ children }: Readonly<RootLayoutProps>) {
           Saltar al contenido
         </a>
         {children}
+        <LocalBusinessJsonLd />
         <Analytics />
       </body>
     </html>
