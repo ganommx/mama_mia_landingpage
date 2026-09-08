@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Bolsas",
   description:
     "Explora nuestra selección de bolsas elegantes para complementar tu look y darle el toque final a tu evento.",
+  alternates: {
+    canonical: "/bolsas",
+  },
 };
 
 export default function BolsasPage() {

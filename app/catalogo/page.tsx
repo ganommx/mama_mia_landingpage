@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Catálogo completo",
   description:
     "Explora nuestra colección completa de vestidos para graduaciones, bodas, XV años y noches especiales.",
+  alternates: {
+    canonical: "/catalogo",
+  },
 };
 
 export default function CatalogoPage() {
