@@ -51,6 +51,7 @@ export interface Bag {
   price?: number;
   imageUrl?: string;
   isAvailable?: boolean;
+  imageScale?: number;
 }
 export interface Testimonial {
   id: string;

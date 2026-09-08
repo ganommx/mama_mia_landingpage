@@ -9,15 +9,29 @@ import { BAGS } from "@/constants/bags";
 import { useWhatsApp } from "@/hooks/useWhatsApp";
 import { formatCurrency } from "@/lib/utils";
 import type { Bag, BagCardProps } from "@/types";
+import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Lightbox } from "@/components/ui/Lightbox";
 import { SectionTitle } from "@/components/ui/SectionTitle";
 
 const BAG_PREVIEW_LIMIT = 4;
 
-const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
+const BagCard = ({
+  id,
+  name,
+  price,
+  imageUrl,
+  color,
+  colorHex,
+  isAvailable = true,
+  imageScale = 1.48,
+  onCardClick,
+}: BagCardProps) => {
   const { generateWhatsAppLink } = useWhatsApp();
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const imageAlt = name
+    ? `Bolsa ${name}${color?.length ? ` en color ${color.join(", ")}` : ""}`
+    : `Bolsa ${id}`;
   const message = name
     ? `Hola, me interesa la bolsa "${name}" (${id}). ¿Está disponible y cuál es su precio?`
     : "Hola, me interesa conocer las bolsas disponibles para complementar mi look.";
@@ -38,12 +52,13 @@ const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
       >
         {imageUrl ? (
           <Image
-            alt={name || `Bolsa ${id}`}
+            alt={imageAlt}
             className="object-contain transition-transform duration-500 group-hover:scale-[1.05]"
             fill
             quality={100}
             sizes="(max-width: 640px) 50vw, 33vw"
             src={imageUrl}
+            style={{ transform: `scale(${imageScale})` }}
           />
         ) : (
           <span className="absolute inset-0 flex items-center justify-center">
@@ -55,12 +70,25 @@ const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
             />
           </span>
         )}
+        <Badge className="absolute left-2 top-2 bg-white/90 !px-2 !py-0.5 !text-[10px] normal-case tracking-normal sm:left-4 sm:top-4 sm:!px-3 sm:!py-1 sm:!text-xs">
+          {isAvailable ? "Disponible" : "Próximamente"}
+        </Badge>
       </button>
 
       <div className="flex flex-1 flex-col p-3 sm:p-5">
-        <h3 className="line-clamp-2 font-display text-base leading-tight text-brand-secondary sm:text-xl">
-          {name}
-        </h3>
+        <div className="flex items-start justify-between gap-2 sm:gap-3">
+          <h3 className="line-clamp-2 font-display text-base leading-tight text-brand-secondary sm:text-xl">
+            {name}
+          </h3>
+          {colorHex && (
+            <span
+              aria-label={`Color: ${color?.join(", ") ?? name}`}
+              className="mt-0.5 h-5 w-5 shrink-0 overflow-hidden rounded-full border border-brand-secondary/100 shadow-sm sm:mt-1 sm:h-7 sm:w-7"
+              style={{ background: colorHex }}
+              title={color?.join(", ")}
+            />
+          )}
+        </div>
 
         <div className="mt-auto pt-4 sm:pt-5">
           {typeof price === "number" && (
@@ -70,17 +98,24 @@ const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
           )}
           <Button
             className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
-            href={generateWhatsAppLink(message)}
+            disabled={!isAvailable}
+            href={isAvailable ? generateWhatsAppLink(message) : undefined}
             target="_blank"
-            variant="primary"
+            variant={isAvailable ? "primary" : "outline"}
           >
             <FaWhatsapp
               aria-hidden="true"
               className="mr-1.5 text-[15px] sm:mr-2 sm:text-[17px]"
             />
             <span className="text-[11px] sm:text-sm">
-              <span className="sm:hidden">Consultar</span>
-              <span className="hidden sm:inline">Consultar por WhatsApp</span>
+              {isAvailable ? (
+                <>
+                  <span className="sm:hidden">Consultar</span>
+                  <span className="hidden sm:inline">Consultar por WhatsApp</span>
+                </>
+              ) : (
+                "No disponible"
+              )}
             </span>
           </Button>
         </div>
@@ -88,7 +123,7 @@ const BagCard = ({ id, name, price, imageUrl, onCardClick }: BagCardProps) => {
 
       {imageUrl && (
         <Lightbox
-          alt={name || `Bolsa ${id}`}
+          alt={imageAlt}
           imageUrl={imageUrl}
           isOpen={isLightboxOpen}
           onClose={() => setIsLightboxOpen(false)}
