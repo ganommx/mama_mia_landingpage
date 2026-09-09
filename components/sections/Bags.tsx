@@ -34,7 +34,7 @@ const BagCard = ({
     ? `Bolsa ${name}${color?.length ? ` en color ${color.join(", ")}` : ""}`
     : `Bolsa ${id}`;
   const message = name
-    ? `Hola, me interesa la bolsa "${name}" (${id}). ¿Está disponible y cuál es su precio?`
+    ? `Hola, me interesa la bolsa "${name}" (${id}). ¿Está disponible?`
     : "Hola, me interesa conocer las bolsas disponibles para complementar mi look.";
 
   return (
@@ -93,9 +93,14 @@ const BagCard = ({
 
         <div className="mt-auto pt-4 sm:pt-5">
           {typeof price === "number" && (
-            <span className="text-[13px] font-bold text-brand-secondary sm:text-base">
-              {formatCurrency(price)}
-            </span>
+            <div className="flex items-center justify-between">
+              <span className="rounded-md bg-brand-accent px-1.5 py-[3px] text-[10px] font-medium text-brand-secondary/75 sm:px-2 sm:py-[5px] sm:text-xs">
+                Precio de renta
+              </span>
+              <span className="text-[13px] font-bold text-brand-secondary sm:text-base">
+                {formatCurrency(price)}
+              </span>
+            </div>
           )}
           <Button
             className="mt-3 flex w-full !min-h-9 items-center justify-center !px-2 !py-1.5 sm:mt-5 sm:!min-h-12 sm:!px-6 sm:!py-3"
