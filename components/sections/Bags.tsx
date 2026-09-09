@@ -78,7 +78,7 @@ const BagCard = ({
 
       <div className="flex flex-1 flex-col p-3 sm:p-5">
         <div className="flex items-start justify-between gap-2 sm:gap-3">
-          <h3 className="line-clamp-2 font-display text-base leading-tight text-brand-secondary sm:text-xl">
+          <h3 className="line-clamp-2 font-display text-base leading-tight text-brand-secondary min-h-[2.5em] sm:text-xl sm:min-h-0">
             {name}
           </h3>
           {colorHex && (
