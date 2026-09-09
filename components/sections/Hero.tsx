@@ -56,7 +56,7 @@ export const Hero = () => {
         <div className="relative z-10">
           <Badge>Renta y venta de vestidos</Badge>
           <h1 className="mt-6 max-w-3xl font-display text-5xl leading-[1.04] text-brand-secondary sm:text-6xl lg:text-[90px]">
-            Renta y venta de vestidos para{" "}
+            Elegancia, Confianza{" "}
             <span className="italic text-brand-primary">
               momentos inolvidables
             </span>
