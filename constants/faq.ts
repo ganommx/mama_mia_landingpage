@@ -29,7 +29,7 @@ export const FAQ_ITEMS: FaqItem[] = [
     id: "ajuste",
     question: "¿Qué pasa si necesito un ajuste en mi vestido?",
     answer:
-      "Contamos con posibles ajustes de costura básica. Por ello, es importante acudir al menos 6 días antes de tu evento para realizar cualquier ajuste que sea necesario.",
+      "Contamos con posibles ajustes de costura básica por un costo extra de $100 a $150. Por ello, es importante acudir al menos 6 días antes de tu evento para realizar cualquier ajuste que sea necesario.",
   },
   {
     id: "bolsas",
