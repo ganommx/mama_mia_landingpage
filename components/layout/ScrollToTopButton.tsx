@@ -7,7 +7,11 @@ import { cn } from "@/lib/utils";
 
 const SCROLL_THRESHOLD = 500;
 
-export const ScrollToTopButton = ({ targetId = "catalogo" }: { targetId?: string }) => {
+export const ScrollToTopButton = ({
+  targetId = "catalogo",
+}: {
+  targetId?: string;
+}) => {
   const [scrolled, setScrolled] = useState(false);
   const [footerVisible, setFooterVisible] = useState(false);
 
@@ -44,11 +48,11 @@ export const ScrollToTopButton = ({ targetId = "catalogo" }: { targetId?: string
     <button
       aria-label="Volver arriba"
       className={cn(
-        "fixed bottom-[92px] right-[26px] z-[140] flex h-11 w-11 items-center justify-center rounded-full text-white",
+        "fixed bottom-[40px] right-[26px] z-[140] flex h-11 w-11 items-center justify-center rounded-full text-white",
         "bg-brand-secondary shadow-[0_8px_24px_rgba(45,45,45,0.25)]",
         "transition-all duration-300 ease-out",
         "hover:bg-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary focus-visible:ring-offset-2",
-        "sm:bottom-[100px] sm:right-[34px]",
+        "sm:bottom-[30px] sm:right-[34px]",
         isVisible
           ? "translate-y-0 opacity-100"
           : "pointer-events-none translate-y-3 opacity-0",
