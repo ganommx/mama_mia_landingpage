@@ -1112,7 +1112,7 @@ export const DRESSES: Dress[] = [
     id: "86",
     name: "Caramelo",
     price: 900,
-    sizes: ["100"],
+    sizes: ["10"],
     color: ["café"],
     colorHex: "#C6794F",
     imageUrl: "/images/dresses/86.webp",
@@ -1166,7 +1166,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/90.webp",
     category: DressCategory.GRADUATION,
     isAvailable: true,
-    imageScale: 1.08,
+    imageScale: 1.2,
   },
   {
     id: "91",
@@ -1178,7 +1178,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/91.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
-    imageScale: 1,
+    imageScale: 1.15,
   },
   {
     id: "92",
@@ -1190,7 +1190,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/92.webp",
     category: DressCategory.WEDDING,
     isAvailable: true,
-    imageScale: 1.08,
+    imageScale: 1.13,
   },
   {
     id: "93",
@@ -1202,7 +1202,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/93.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
-    imageScale: 1.08,
+    imageScale: 1.23,
   },
   {
     id: "94",
@@ -1214,6 +1214,6 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/94.webp",
     category: DressCategory.QUINCEANERA,
     isAvailable: true,
-    imageScale: 1.08,
+    imageScale: 1.15,
   },
 ];
