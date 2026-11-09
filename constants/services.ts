@@ -1166,7 +1166,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/90.webp",
     category: DressCategory.GRADUATION,
     isAvailable: true,
-    imageScale: 1.2,
+    imageScale: 1.16,
   },
   {
     id: "91",
@@ -1178,7 +1178,7 @@ export const DRESSES: Dress[] = [
     imageUrl: "/images/dresses/91.webp",
     category: DressCategory.EVENING,
     isAvailable: true,
-    imageScale: 1.08,
+    imageScale: 1.1,
   },
   {
     id: "92",
